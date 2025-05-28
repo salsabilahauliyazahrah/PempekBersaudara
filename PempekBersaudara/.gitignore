@@ -1,0 +1,17 @@
+# Sistem
+.DS_Store
+Thumbs.db
+
+# Folder umum
+/vendor/
+/node_modules/
+/dist/
+/build/
+
+# PHP
+*.log
+*.env
+
+# Editor
+.vscode/
+*.swp
