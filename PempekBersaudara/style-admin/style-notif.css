@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* ===== color ===== */
+    --body-color: #EBF1F1;
+    --sidebar-color: #fff;
+    --primary-color: #426D6D;
+    --primary-color-light: #d9f4f47f;
+    --toggle-color: #ddd;
+    --text-color: #487676;;
+    --box2-color : #C1F5CA;
+    --box3-color : #F5F3C1;
+    --box4-color : #F5D7C1;
+    --box1-color : #F5C1C1;
+
+
+    /* ===== Transition ===== */
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease;
+}
+
+.notifikasi{
+    position: relative;
+    height: 100vh;
+    left: 250px;
+    width: calc(100% - 250px);
+    background: var(--body-color);
+    transition: var(--tran-05);
+}
+
+.notifikasi .notif-content{
+    padding-top: 100px;
+
+}
+
+.sidebar.sidebar.close ~ .notifikasi{
+    left: 88px;
+    width: calc(100% - 88px);
+}
+
+.notif-content .tittle{
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--text-color);
+    padding: 8px 40px;
+    margin: 20px 1 30px 0;
+}
+
+.sidebar.sidebar.close ~ .notifikasi{
+    left: 88px;
+    width: calc(100% - 88px);
+}
+
+.notif-content .tittle i{
+    position: relative;
+    height: 35px;
+    width: 35px;
+    background-color: var(--primary-color);
+    border-radius: 6px;
+    color: var(--sidebar-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;   
+}
+
+.notif-content .tittle .text{
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-left: 10px;
+}
+
+/* ============ seacrh bar ============ */
+.notifikasi .top{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px 10px;
+    
+}
+
+.notifikasi .top .search-box{
+    position: relative;
+    height: 45px;
+    max-width: 600px;
+    width: 100%;
+    margin: 0 30px;
+}
+
+.top .search-box input{
+    position: absolute;
+    border: 1px solid var(--primary-color);
+    background-color: var(--body-color);
+    padding: 0 25px 0 50px;
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
+    color: var(--text-color);
+    font: 15px;
+    font-weight: 500;
+}
+
+.top .search-box i{
+    position: absolute;
+    left: 15px;
+    font-size: 22px;
+    z-index: 10;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary-color);
+}
+
+/* ============ table ============ */
+
+.notif-table{
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--sidebar-color);
+    border: 1px solid var(--text-color);
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.notif-table th, 
+.notif-table td{
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--primary-color);
+    color: var(--text-color);
+}
+
+.notif-table th{
+    font-weight: 600;
+    font-size: 17px;
+    text-align: center;
+}
+
+.notif-table td.center{
+    text-align: center;
+}
+
+.notif-table tr:hover{
+    background-color: #f4f9f9;
+}
+
+.notif-table td:hover{
+    background-color: var(--box2-color);
+}
+
+.activity{
+    overflow-x: auto;
+    padding: 0 40px;
+}
+
+.menu-item{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+    gap: 5px;
+}
+
+.menu-name {
+    font-weight: 500;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.menu-qty{
+    font-weight: bold;
+    color: var(--text-color);
+}

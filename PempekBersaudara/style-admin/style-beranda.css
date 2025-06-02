@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* ===== color ===== */
+    --body-color: #EBF1F1;
+    --sidebar-color: #fff;
+    --primary-color: #426D6D;
+    --primary-color-light: #d9f4f47f;
+    --toggle-color: #ddd;
+    --text-color: #487676;;
+    --box2-color : #C1F5CA;
+    --box3-color : #F5F3C1;
+    --box4-color : #F5D7C1;
+    --box1-color : #F5C1C1;
+
+
+    /* ===== Transition ===== */
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease;
+}
+
+.dashboard{
+    position: relative;
+    height: 100vh;
+    left: 250px;
+    width: calc(100% - 250px);
+    background: var(--body-color);
+    transition: var(--tran-05);
+}
+
+.dashboard .dash-content{
+    padding-top: 100px;
+
+}
+
+.dash-content .tittle{
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--text-color);
+    padding: 8px 40px;
+    margin: 20px 1 30px 0;
+}
+
+.sidebar.sidebar.close ~ .dashboard{
+    left: 88px;
+    width: calc(100% - 88px);
+}
+
+
+.dash-content .tittle i{
+    position: relative;
+    height: 35px;
+    width: 35px;
+    background-color: var(--primary-color);
+    border-radius: 6px;
+    color: var(--sidebar-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;   
+}
+
+.dash-content .tittle .text{
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-left: 10px;
+}
+
+.dash-content .boxes{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content:  space-between;
+    padding: 20px 40px;
+    gap: 20px
+}    
+
+.dash-content .boxes  .box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 12px;
+    flex: 1 1 200px;
+    max-width: 350px;
+    padding: 15px 20px;
+    background-color: var(--box1-color);
+}
+
+.boxes .box i{
+    display: flex;
+    align-items: center;
+    font-size: 35px;
+    color: var(--text-color);
+}
+
+.boxes .box .text{
+    white-space: nowrap;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.boxes .box .number{    
+    font-size: 40px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.boxes .box.box2{
+    background-color: var(--box2-color);
+}
+
+.boxes .box.box3{
+    background-color: var(--box3-color);
+}
+
+.boxes .box.box4{
+    background-color: var(--box4-color);
+}
+

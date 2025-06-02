@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* ===== color ===== */
+    --body-color: #EBF1F1;
+    --sidebar-color: #fff;
+    --primary-color: #426D6D;
+    --primary-color-light: #d9f4f47f;
+    --toggle-color: #ddd;
+    --text-color: #487676;;
+    --box2-color : #C1F5CA;
+    --box3-color : #F5F3C1;
+    --box4-color : #F5D7C1;
+    --box1-color : #F5C1C1;
+
+
+    /* ===== Transition ===== */
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease;
+}
+
+/* ============ judul ============ */
+
+.laporan{
+    position: relative;
+    height: 100vh;
+    left: 250px;
+    width: calc(100% - 250px);
+    background: var(--body-color);
+    transition: var(--tran-05);
+}
+
+.laporan .laporan-content{
+    padding-top: 100px;
+
+}
+
+.sidebar.sidebar.close ~ .laporan{
+    left: 88px;
+    width: calc(100% - 88px);
+}
+
+.laporan-content .tittle{
+    display: flex;
+    align-items: center;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--text-color);
+    padding: 8px 40px;
+    margin: 20px 1 30px 0;
+}
+
+.laporan-content .tittle i{
+    position: relative;
+    height: 35px;
+    width: 35px;
+    background-color: var(--primary-color);
+    border-radius: 6px;
+    color: var(--sidebar-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;   
+}
+
+.laporan-content .tittle .text{
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-left: 10px;
+}
+
+/* ============ Box - box Pendapatan ============ */
+.summary-boxes{
+    display: flex;
+    gap: 20px;
+    padding: 20px 40px;
+}
+
+.summary-boxes .box{
+    background-color: var(--sidebar-color);
+    flex: 1;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.summary-boxes .box h2{
+    margin-top: 10px;
+    color: var(--primary-color);
+}
+
+/* ============ print laporan ============ */
+.report-forms{
+    display: flex;
+    gap: 20px;
+    padding: 0 40px;
+    margin-top: 20px;
+}
+
+.report-box{
+    flex: 1;
+    background: var(--sidebar-color);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.report-box h4{
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.report-box select,
+.report-box input[type="date"]{
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.print-btn{
+    background-color: var(--primary-color);
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.print-btn i {
+    margin-right: 6px;
+}

@@ -1,0 +1,152 @@
+/* Login  */
+
+* {
+    margin: 0;
+    padding: 0; 
+    box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 0 10px;
+  background: #EBF1F1;
+}
+
+/* Kotak Login */
+.login-container {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 601px;
+    top: 214px;
+}
+
+/* heroicons:user-16-solid */
+.login-box {
+    background-color: #5A8F8B; 
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 350px; 
+    text-align: center;
+    color: #FFFEE5; 
+}
+
+.login-box h2 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: bold; 
+}
+
+.input-group {
+    position: relative; 
+    margin-bottom: 25px;
+}
+
+.input-group input {
+    box-sizing: border-box;
+    width: 100%; 
+    padding: 12px 12px 12px 40px; 
+    border: none; 
+    border-bottom: 2px solid #FFFEE5; 
+    background-color: transparent;
+    color: #FFFEE5;
+    font-size: 16px;
+}
+
+.input-group input::placeholder {
+    color: #FFFEE5;
+    opacity: 0.8;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-bottom-color: #fffdd0 ;
+}
+
+.icon-username,
+.icon-password {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    z-index: 1;
+}
+
+.icon-username::before {
+    font-family: "Font Awesome 5 Free"; 
+    content: "\f007";
+    font-weight: 900;
+    color: #FFFEE5;
+}
+
+.icon-password::before {
+    font-family: "Font Awesome 5 Free"; 
+    content: "\f023";
+    font-weight: 900;
+    color: #FFFEE5;
+}
+
+.login-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px; 
+    background-color: #B2D8B2; 
+    color: #333; 
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+    background-color: #A1C7A1; 
+}
+
+.register-link a {
+    color: #FFFEE5;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+.warning-message {
+    background-color: #EBF1F1;
+    color: #6f1118;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+}
+
+.warning-message:hover {
+    background-color: #e1eaea; 
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
