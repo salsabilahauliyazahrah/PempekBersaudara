@@ -31,8 +31,7 @@ if (!isset($_SESSION['user_name'])) {
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="../style-pelanggan/style.css" />
 
-  
-
+    
     <title>Pempek Bersaudara</title>
   </head>
   <body>
@@ -58,19 +57,19 @@ if (!isset($_SESSION['user_name'])) {
             <li class="nav__item">
               <a href="#keranjang" class="nav__link">Keranjang</a>
             </li>
-            <!-- User dropdown menu -->
+            
             <li class="nav__item nav__user dropdown">
               <div class="nav__user-menu" id="userMenu">
                 <span class="nav__user-greeting">Hi, <?php echo $_SESSION['user_name']; ?></span>
                 <i class="ri-arrow-down-s-line dropdown-icon"></i>
               </div>
               <div class="dropdown-content">
-                <a href="logout.php" class="dropdown-item">
+                <a href="../proses-pelanggan/logout.php" class="dropdown-item">
                   <i class="ri-logout-box-line"></i> Logout
                 </a>
               </div>
             </li>
-            <!-- Theme toggle aligned with menu -->
+            
             <li class="nav__item">
               <i class="ri-moon-line change-theme" id="theme-button"></i>
             </li>
@@ -84,7 +83,7 @@ if (!isset($_SESSION['user_name'])) {
           <img src="assets/img/leaf-branch-3.png" alt="leaf image" class="nav__img-2" />
         </div>
 
-        <!-- Toggle button for mobile -->
+
         <div class="nav__toggle" id="nav-toggle">
           <i class="ri-apps-2-line"></i>
         </div>
@@ -171,9 +170,14 @@ if (!isset($_SESSION['user_name'])) {
                 <h3 class="popular__name">Pempek Adaan</h3>
                 <span class="popular__description">Pempek</span>
                 <span class="popular__price">Rp25.000</span>
-                <button class="popular__button">
-                    <i class="ri-shopping-bag-line"></i>
-                </button>
+                <div class="popular__buttons">
+                    <button class="popular__button">
+                        <i class="ri-shopping-bag-line"></i>
+                    </button>
+                    <a href="menu_detail.php?id=adaan" class="popular__detail">
+                        Detail <i class="ri-arrow-right-line"></i>
+                    </a>
+                </div>
             </article>
 
             <article class="popular__card">
@@ -196,8 +200,6 @@ if (!isset($_SESSION['user_name'])) {
                 </button>
             </article>
         </div>
-
-        <!-- View All Menu Button -->
         <div class="view-all-menu">
             <a href="menu.php" class="button">
                 Lihat Semua Menu <i class="ri-arrow-right-line"></i>
@@ -214,7 +216,7 @@ if (!isset($_SESSION['user_name'])) {
             <div class="testi__container container grid">
                 <div class="testi__card">
                     <div class="card__body">
-                        <p class="testi__name">Neil Patel</p>
+                        <p class="testi__name">Ivanna</p>
                         <div class="testi__stars">
                             <i class="ri-star-fill"></i>
                             <i class="ri-star-fill"></i>
@@ -232,12 +234,12 @@ if (!isset($_SESSION['user_name'])) {
 
                 <div class="testi__card">
                     <div class="card__body">
-                        <p class="testi__name">Cellia Rins</p>
+                        <p class="testi__name">Asih </p>
                         <div class="testi__stars">
                             <i class="ri-star-fill"></i>
                             <i class="ri-star-fill"></i>
                             <i class="ri-star-fill"></i>
-                            <i class="ri-star-line"></i>
+                            <i class="ri-star-fill"></i>
                             <i class="ri-star-line"></i>
                         </div>
                         <p class="testi__comment">
@@ -250,7 +252,7 @@ if (!isset($_SESSION['user_name'])) {
 
                 <div class="testi__card">
                     <div class="card__body">
-                        <p class="testi__name">Mike Demien</p>
+                        <p class="testi__name">Peter</p>
                         <div class="testi__stars">
                             <i class="ri-star-fill"></i>
                             <i class="ri-star-line"></i>
@@ -260,7 +262,7 @@ if (!isset($_SESSION['user_name'])) {
                         </div>
                         <p class="testi__comment">
                             <i class="ri-double-quotes-l"></i>
-                            Pempek yang sangat jujur, karena rasa ikan yang sangat melekat alias sangat terasa!!
+                            Pempek ini teksturnya lembut dan lezat, sayang sekali waktu saya datang sudah habis.
                             <i class="ri-double-quotes-r"></i>
                         </p>
                     </div>
@@ -274,7 +276,7 @@ if (!isset($_SESSION['user_name'])) {
       <div class="footer__container container grid">
         <div>
           <a href="#" class="footer__logo">
-            <img src="assets/img/favicon.ico" alt="footer image" />
+            <img src="assets/img/Favicon.png" alt="footer image" />
             Pempek Bersaudara
           </a>
           <p class="footer__description">
@@ -290,15 +292,6 @@ if (!isset($_SESSION['user_name'])) {
             <ul class="footer__links">
               <li><a href="#menu" class="footer__link">Menu</a></li>
               <li><a href="#testimoni" class="footer__link">testimoni</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 class="footer__title">Informasi</h3>
-            <ul class="footer__links">
-              <li><a href="#" class="footer__link">Kontak</a></li>
-              <li><a href="#" class="footer__link">Pemesanan</a></li>
-              <li><a href="#" class="footer__link">Lokasi</a></li>
             </ul>
           </div>
 
@@ -330,7 +323,7 @@ if (!isset($_SESSION['user_name'])) {
         </div>
 
         <img src="assets/img/leaf-branch-4.png" alt="footer image" class="footer__leaf" />
-        <span class="footer__copy">&#169; 2023 Copyright. All rights reserved</span>
+        <span class="footer__copy">&#169; 2025 Copyright. All rights reserved</span>
       </div>
     </footer>
 
@@ -340,10 +333,10 @@ if (!isset($_SESSION['user_name'])) {
     </a>
 
     <!--=============== SCROLLREVEAL ===============-->
-    <script src="../javascript/scrollreveal.min.js"></script>
+    <script src="assets/js/scrollreveal.min.js"></script>
 
     <!--=============== MAIN JS ===============-->
-    <script src="../javascript/main.js"></script>
+    <script src="assets/js/main.js"></script>
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>

@@ -563,10 +563,10 @@ body.dark-theme {
   position: relative;
   background-color: var(--container-color);
   padding: 7rem 2rem 1.5rem;
-  box-shadow: 0 8px 20px hsla(20, 65%, 50%, 0.8);
+  box-shadow: 0 8px 20px hsla(20, 65%, 50%, 0.1);
   border-radius: 1rem;
   text-align: center;
-  transition: background-color 0.4s; /* for dark mode animation */
+  transition: all 0.4s;
 }
 
 .popular__img {
@@ -576,50 +576,70 @@ body.dark-theme {
   top: -2.5rem;
   margin: 0 auto;
   transition: transform 0.4s;
+  padding: 1rem;
+  /*background-color: #ffffff;*/
+  border-radius: 1rem;
+  /*box-shadow: 0 4px 12px hsla(20, 65%, 50%, 0.08);*/
 }
 
-.popular__name {
-  font-size: var(--h3-font-size);
-  font-family: var(--title-font);
-  margin-bottom: 0.3rem;
+.popular__card:hover {
+  box-shadow: 0 12px 24px hsla(20, 65%, 50%, 0.15);
+  transform: translateY(-0.5rem);
 }
 
-.popular__description {
-  display: block;
-  font-size: var(--smaller-font-size);
-  margin-bottom: 1rem;
+.popular__card:hover .popular__img {
+  transform: translateY(-0.5rem);
 }
 
-.popular__price {
-  font-size: var(--h3-font-size);
-  font-weight: var(--font-medium);
-  color: var(--first-color);
+.popular__buttons {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
 .popular__button {
   display: flex;
-  background-color: var(--first-color);
-  padding: 6px;
+  padding: 0.5rem;
   border-radius: 50%;
   border: none;
   outline: none;
+  cursor: pointer;
+  background-color: var(--first-color);
   color: #fff;
   font-size: 1.3rem;
-  box-shadow: 0 4px 20px hsla(19, 64%, 20%, 0.2);
-  position: absolute;
-  bottom: 1.25rem;
-  right: 1.25rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  transition: all 0.3s;
 }
 
+.popular__detail {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: var(--first-color);
+  color: #fff;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.popular__detail i,
+.popular__button i {
+  transition: transform 0.3s;
+}
+
+.popular__detail:hover,
 .popular__button:hover {
   background-color: var(--first-color-alt);
 }
 
-.popular__card:hover .popular__img {
-  transform: translateY(-0.3rem);
+.popular__detail:hover i,
+.popular__button:hover i {
+  transform: translateX(0.25rem);
 }
+
 /*=============== TESTIMONI ===============*/
   .contactus {
       height: 790px;
@@ -1484,7 +1504,7 @@ body.dark-theme {
     display: flex;
     gap: 0.25rem;
     margin-bottom: 1rem;
-    color: var(--first-color);
+    color: gold;
 }
 
 .testi__stars i {
@@ -1498,7 +1518,7 @@ body.dark-theme {
 }
 
 .testi__comment i {
-    color: var(--first-color);
+    color: black;
     font-size: 1.25rem;
     margin: 0 0.5rem;
 }
@@ -1528,16 +1548,84 @@ body.dark-theme {
     padding: 1rem;
 }
 
-.view-all-menu {
-    display: flex;
-    justify-content: center;
-    margin-top: 3rem;
-}
-
 /* Responsive adjustments for menu */
 @media screen and (max-width: 768px) {
     .popular__container {
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         gap: 1.5rem;
     }
+}
+
+/*=============== MENU DETAIL ===============*/
+.menu__detail {
+  padding-top: 8rem;
+}
+
+.menu__detail-card {
+ /* background-color: var(--container-color);*/
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  /*box-shadow: 0 8px 20px hsla(20, 65%, 50%, 0.1);*/
+}
+
+.menu__detail-img {
+  /*background-color: #ffffff;*/
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+  /*box-shadow: 0 4px 12px hsla(20, 65%, 50%, 0.08);*/
+}
+
+.menu__detail-img img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.4s;
+}
+
+.menu__detail-img:hover img {
+  transform: translateY(-0.5rem);
+}
+
+.menu__detail-title {
+  font-size: var(--biggest-font-size);
+  font-family: var(--title-font);
+  color: var(--title-color);
+  margin-bottom: 1rem;
+}
+
+.menu__detail-description {
+  color: var(--text-color);
+  margin-bottom: 2rem;
+}
+
+.menu__detail-info h3 {
+  font-size: var(--h2-font-size);
+  font-family: var(--title-font);
+  color: var(--title-color);
+  margin-bottom: 1rem;
+}
+
+.menu__detail-price {
+  font-size: var(--h2-font-size);
+  color: var(--first-color);
+  font-weight: var(--font-semi-bold);
+  margin: 2rem 0;
+}
+
+.menu__detail-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.button--ghost {
+  background-color: transparent;
+  border: 2px solid var(--first-color);
+  color: var(--first-color);
+}
+
+.button--ghost:hover {
+  background-color: var(--first-color);
+  color: #fff;
 }
