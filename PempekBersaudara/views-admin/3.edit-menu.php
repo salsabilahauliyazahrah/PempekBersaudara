@@ -63,7 +63,7 @@
 
                             <div class="buttons">
                                 <button type="submit" class="btn-submit">Update</button>
-                                <button type="reset" class="btn-reset">Reset</button>
+                                
                             </div>
                         </div>
 

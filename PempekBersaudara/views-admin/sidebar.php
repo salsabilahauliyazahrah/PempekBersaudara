@@ -34,12 +34,6 @@
                         </a>
                     </li>
                     <li class="nav-link">
-                        <a href="notifikasi.php">
-                            <i class='bx bx-bell icon'></i>
-                            <span class="text nav-text">Notifikasi</span>
-                        </a>
-                    </li>
-                    <li class="nav-link">
                         <a href="menu.php">
                             <i class='bx bx-food-menu icon'></i>
                             <span class="text nav-text">Menu</span>
@@ -69,12 +63,14 @@
                             <span class="text nav-text">Laporan</span>
                         </a>
                     </li>
+                     <!-- dipending dulu 
                     <li class="nav-link">
                         <a href="testimoni.php">
                             <i class='bx bx-comment icon'></i>
                             <span class="text nav-text">Testimoni</span>
                         </a>
                     </li>
+                     -->
                 </ul>
             </div>
 
@@ -91,6 +87,21 @@
             </div>
         </div>
     </nav>
+
+    <!-- Navbar -->
+    <div class="main-content">
+        <!-- Top Navbar -->
+        <nav class="top-navbar">
+            <div class="left-section">                
+            </div>
+            <div class="right-section">
+                <div class="profile-foto">
+                    <img src="../foto-foto/logo.png" alt="profile" class="profile-pic">
+                    <span class="profile-name">Admin</span>
+                </div>
+            </div>
+        </nav>
+    </div>
 
     <script src="../javascript/script.js"></script>
 

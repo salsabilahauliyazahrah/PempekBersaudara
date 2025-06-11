@@ -40,7 +40,6 @@
 
                             <div class="buttons">
                                 <button type="submit" class="btn-submit">Submit</button>
-                                <button type="reset" class="btn-reset">Reset</button>
                             </div>
                         </div>
 

@@ -15,12 +15,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style-admin/style-menu.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+        <!--=============== FAVICON ===============-->
+    <!-- TODO: Replace with actual pempek logo -->
+    <link rel="shortcut icon" href="../foto-foto/logo.png" type="image/x-icon" />
+
     <title>Menu</title>
+
 </head>
 <body>
     <!-- menu.php -->
     <?php include('sidebar.php'); ?>
-    <div class="halaman-menu">=
+    <div class="halaman-menu">
         <div class="menu-content">
             <div class="overview">
                 <div class="tittle">
@@ -68,10 +74,7 @@
                                 <td class="center"><?= $menu['total_terjual'] ?></td>
                                 <td class="center">
                                     <div class="action-button">  
-                                        <a href="2.detail-menu.php?id=<?= $menu['id_menu'] ?>" class="btn-detail">
-                                            <i class='bx bx-info-circle'></i>
-                                            Detail
-                                        </a>
+                                        
                                         <a href="3.edit-menu.php?id=<?= $menu['id_menu'] ?>" class="btn-edit">
                                             <i class='bx bx-edit'></i> 
                                             Edit

@@ -52,7 +52,7 @@
                                 <?php while ($row = mysqli_fetch_assoc($result)) : ?>
                                     <tr>
                                         <td class="center"><?= $row['id_testimoni']; ?></td>
-                                        <td class="center">-</td> <!-- Kosongkan atau ganti jika tidak ada tanggal -->
+                                        <td class="center"><?= $row['tanggal_testimoni'] ?? '-' ?></td> 
                                         <td class="center"><?= htmlspecialchars($row['nama']); ?></td>
                                         <td class="center"><?= htmlspecialchars($row['email']); ?></td>
                                         <td class="center"><?= htmlspecialchars($row['pesan']); ?></td>

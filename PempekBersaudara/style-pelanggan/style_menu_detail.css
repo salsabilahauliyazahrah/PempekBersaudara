@@ -1,0 +1,121 @@
+/*=============== MENU DETAIL ===============*/
+.menu__detail .container {
+  width: 90%;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/*.menu__detail-card {
+  background-color: var(--container-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}*/
+
+.menu__detail-img {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.menu__detail-img img {
+  width: 100%;
+  max-width: 450px;
+  border-radius: 1rem;
+  object-fit: cover;
+}
+
+.menu__detail-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.menu__detail-title {
+  font-size: var(--h1-font-size);
+  color: var(--title-color);
+  font-weight: var(--font-medium);
+  margin-bottom: 1rem;
+}
+
+.menu__detail-description {
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+}
+
+.menu__detail-info h3 {
+  color: var(--title-color);
+  font-size: var(--h3-font-size);
+  font-weight: var(--font-medium);
+  margin-bottom: 0.5rem;
+}
+
+
+.menu__detail-info p {
+  color: var(--text-color);
+  margin-bottom: 1.5rem;
+}
+
+.menu__detail-price {
+  margin: 1.5rem 0;
+}
+
+.menu__detail-price .price {
+  color: var(--first-color);
+  font-size: var(--h2-font-size);
+  font-weight: var(--font-medium);
+}
+
+.menu__detail-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+.menu__detail-buttons .button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: black; 
+  border: 2px solid var(--first-color);
+}
+
+.button--ghost {
+  background-color: transparent;
+  border: 2px solid var(--first-color);
+  color: black; 
+}
+
+.button--ghost:hover {
+  background-color: var(--first-color);
+  color: #fff;
+}
+
+/* For medium devices */
+@media screen and (min-width: 767px) {
+  .menu__detail .container {
+    max-width: var(--container-width);
+    padding: 0 2rem;
+  }
+
+  .menu__detail-card {
+    padding: 2.5rem;
+  }
+
+  .menu__detail-img {
+    margin-bottom: 0;
+  }
+}
+
+/* For small devices */
+@media screen and (max-width: 576px) {
+  .menu__detail-buttons {
+    flex-direction: column;
+  }
+
+  .menu__detail-buttons .button {
+    width: 100%;
+    justify-content: center;
+  }
+}

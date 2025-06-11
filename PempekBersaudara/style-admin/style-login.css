@@ -17,20 +17,19 @@ body {
 
 /* Kotak Login */
 .login-container {
-    content: "";
-    position: absolute;
     width: 100%;
     height: 100%;
-    left: 601px;
-    top: 214px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /* heroicons:user-16-solid */
 .login-box {
-    background-color: #5A8F8B; 
+    background-color: #5a8f8b79; 
     padding: 40px;
     border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.299);
     width: 350px; 
     text-align: center;
     color: #FFFEE5; 

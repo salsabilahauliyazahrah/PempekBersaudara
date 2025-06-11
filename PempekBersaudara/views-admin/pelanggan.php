@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    include '../database/koneksi.php';
+
+    $query = "SELECT * FROM pelanggan ORDER BY id_pelanggan ASC";
+    $result = mysqli_query($koneksi, $query);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,24 +41,19 @@
                                 <th>Nama</th>
                                 <th>No Telepon</th>
                                 <th>Username</th>
-                                <th>Tindakan</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
+                        <?php while ($row = mysqli_fetch_assoc($result)) : ?>
                             <tr>
-                                <td class="center">1</td>
-                                <td class="center">Mochi</td>
-                                <td class="center">0000081</td>
-                                <td class="center">mochi@gmail.com</td>
-                                <td class="center">
-                                    <div class="action-button">
-                                        <a href="" class="btn-hapus">
-                                            <i class='bx  bx-trash'></i>
-                                            Hapus
-                                        </a>
-                                    </div>
-                                </td>
+                                <td class="center"><?= htmlspecialchars($row['id_pelanggan']) ?></td>
+                                <td class="center"><?= htmlspecialchars($row['nama_pelanggan']) ?></td>
+                                <td class="center"><?= htmlspecialchars($row['no_telepon']) ?></td>
+                                <td class="center"><?= htmlspecialchars($row['email']) ?></td>
+                                
                             </tr>
+                        <?php endwhile; ?>
                         </tbody>
                     </table>
                 </div>

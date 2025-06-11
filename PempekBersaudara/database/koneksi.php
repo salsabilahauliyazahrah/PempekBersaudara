@@ -1,8 +1,8 @@
 <?php
     $host = "localhost";
     $user = "root";
-    $password = "basdat2024";
-    $database = "pempek";
+    $password = "";
+    $database = "pempekbersaudara";
 
     $koneksi = new mysqli($host, $user, $password, $database);
 

@@ -118,3 +118,60 @@ document.addEventListener('click', (e) => {
     navUser.classList.remove('show-dropdown')
   }
 })
+
+document.addEventListener('DOMContentLoaded', function() {
+    const ratingStars = document.querySelectorAll('.rating i');
+    let selectedRating = 0;
+
+    function updateStars(rating) {
+        ratingStars.forEach((star, index) => {
+            if (index < rating) {
+                star.classList.remove('ri-star-line');
+                star.classList.add('ri-star-fill');
+            } else {
+                star.classList.remove('ri-star-fill');
+                star.classList.add('ri-star-line');
+            }
+        });
+    }
+
+    ratingStars.forEach(star => {
+        // Click event
+        star.addEventListener('click', function() {
+            selectedRating = parseInt(this.dataset.rating);
+            updateStars(selectedRating);
+        });
+
+        // Hover events
+        star.addEventListener('mouseenter', function() {
+            const rating = parseInt(this.dataset.rating);
+            updateStars(rating);
+        });
+    });
+
+    // Mouse leave event for the rating container
+    document.querySelector('.rating').addEventListener('mouseleave', function() {
+        updateStars(selectedRating);
+    });
+
+    // Form submission handling
+    document.getElementById('submitTestimoni').addEventListener('click', function() {
+        const nama = document.getElementById('nama').value;
+        const email = document.getElementById('email').value;
+        const masukan = document.getElementById('masukan').value;
+
+        if (nama && email && masukan && selectedRating > 0) {
+            // Here you would typically send this data to your server
+            alert('Terima kasih atas masukan Anda!');
+            const modal = bootstrap.Modal.getInstance(document.getElementById('testimoniModal'));
+            modal.hide();
+
+            // Reset form
+            document.getElementById('testimoniForm').reset();
+            selectedRating = 0;
+            updateStars(0);
+        } else {
+            alert('Mohon lengkapi semua field dan berikan rating.');
+        }
+    });
+});

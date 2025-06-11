@@ -1,6 +1,7 @@
 <?php
 session_start();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +13,10 @@ session_start();
 	<link rel="stylesheet" href="../style-pelanggan/style-login.css">
 </head>
 <body>
-	<div class="container" id="container">		<div class="form-container sign-up-container">			
-            <form action="process_register.php" method="POST" id="signupForm">
+	<!--==================== Register ====================-->
+	<div class="container" id="container">		
+		<div class="form-container sign-up-container">			
+            <form action="../proses-pelanggan/process_register.php" method="POST" id="signupForm">
 				<h1>Buat Akun</h1>
                 <?php if(isset($_SESSION['register_error'])): ?>
                     <div class="error-message"><?php echo $_SESSION['register_error']; unset($_SESSION['register_error']); ?></div>
@@ -21,8 +24,8 @@ session_start();
                 <?php if(isset($_SESSION['register_success'])): ?>
                     <div class="success-message"><?php echo $_SESSION['register_success']; unset($_SESSION['register_success']); ?></div>
                 <?php endif; ?>
-				<input type="text" name="nama" placeholder="Username" required minlength="3" maxlength="50" />
-                <input type="text" name="no_tlp" placeholder="Nomor Telpon" required pattern="[0-9]{10,15}" title="Nomor telepon harus 10-15 digit" />
+				<input type="text" name="nama_pelanggan" placeholder="Username" required minlength="3" maxlength="50" />
+                <input type="text" name="no_telepon" placeholder="Nomor Telpon" required pattern="[0-9]{10,15}" title="Nomor telepon harus 10-15 digit" />
 				<input type="email" name="email" placeholder="Email" required />
 				<input type="password" name="password" id="signupPassword" placeholder="Password" required minlength="8" 
                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
@@ -33,13 +36,16 @@ session_start();
                 </div>
 				<button type="submit" name="register" style="background-color: black; color: white;">Daftar</button>
 			</form>
-		</div>		<div class="form-container sign-in-container">			
-            <form action="process_login.php" method="POST" id="loginForm">
+		</div>		
+	
+	<!--==================== LOGIN ====================-->
+		<div class="form-container sign-in-container">			
+            <form action="../proses-pelanggan/process_login.php" method="POST" id="loginForm">
 				<h1>Masuk</h1>
                 <?php if(isset($_SESSION['login_error'])): ?>
                     <div class="error-message"><?php echo $_SESSION['login_error']; unset($_SESSION['login_error']); ?></div>
                 <?php endif; ?>
-				<input type="text" name="username" placeholder="Username" required />
+				<input type="text" name="username" placeholder="Email" required />
 				<input type="password" name="password" id="loginPassword" placeholder="Password" required />
                 <div class="show-password">
                     <input type="checkbox" id="showLoginPassword">

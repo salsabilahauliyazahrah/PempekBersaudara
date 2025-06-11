@@ -1,11 +1,21 @@
 <?php
-session_start();
-// Check if user is logged in
-if (!isset($_SESSION['user_name'])) {
-    header("Location: ../login.php");
-    exit();
-}
+  session_start();
+  if (!isset($_SESSION['user_name'])) {
+      header("Location: ../views-pelanggan/login.php");
+      exit();
+  }
+
+  include '../database/koneksi.php';
+
+  $query = "SELECT * FROM menu"; 
+  $result = mysqli_query($koneksi, $query);
+
+  if (!$result) {
+      die("Query error: " . mysqli_error($koneksi));
+  }
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -23,15 +33,16 @@ if (!isset($_SESSION['user_name'])) {
 
     <!--=============== FAVICON ===============-->
     <!-- TODO: Replace with actual pempek logo -->
-    <link rel="shortcut icon" href="assets/img/Favicon.png" type="image/x-icon" />
+    <link rel="shortcut icon" href="../foto-foto/Favicon.png" type="image/x-icon" />
 
     <!--=============== REMIXICONS ===============-->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet" />
 
     <!--=============== CSS ===============-->
-    <link rel="stylesheet" href="../style-pelanggan/style.css" />
+    <link rel="stylesheet" href="../style-pelanggan/styles-index.css" />
 
-    
+
+
     <title>Pempek Bersaudara</title>
   </head>
   <body>
@@ -39,7 +50,7 @@ if (!isset($_SESSION['user_name'])) {
     <header class="header" id="header">
       <nav class="nav container">
         <a href="#" class="nav__logo">
-          <img src="assets/img/Favicon.png" alt="logo">
+          <img src="../foto-foto/Favicon.png" alt="logo">
           Pempek Bersaudara
         </a>
 
@@ -55,9 +66,9 @@ if (!isset($_SESSION['user_name'])) {
               <a href="#testimoni" class="nav__link">Testimoni</a>
             </li>
             <li class="nav__item">
-              <a href="#keranjang" class="nav__link">Keranjang</a>
+              <a href="keranjang.php" class="nav__link">Keranjang</a>
             </li>
-            
+            <!-- User dropdown menu -->
             <li class="nav__item nav__user dropdown">
               <div class="nav__user-menu" id="userMenu">
                 <span class="nav__user-greeting">Hi, <?php echo $_SESSION['user_name']; ?></span>
@@ -69,7 +80,7 @@ if (!isset($_SESSION['user_name'])) {
                 </a>
               </div>
             </li>
-            
+            <!-- Theme toggle aligned with menu -->
             <li class="nav__item">
               <i class="ri-moon-line change-theme" id="theme-button"></i>
             </li>
@@ -83,7 +94,7 @@ if (!isset($_SESSION['user_name'])) {
           <img src="assets/img/leaf-branch-3.png" alt="leaf image" class="nav__img-2" />
         </div>
 
-
+        <!-- Toggle button for mobile -->
         <div class="nav__toggle" id="nav-toggle">
           <i class="ri-apps-2-line"></i>
         </div>
@@ -112,7 +123,7 @@ if (!isset($_SESSION['user_name'])) {
                   <a href="menu.php" class="button">Pesan Sekarang <i class="ri-arrow-right-line"></i></a>
                 </div>
                 <div class="col-md-6 carousel-image">
-                  <img src="assets/img/lenjer.png" alt="Pempek Lenjer">
+                  <img src="../foto-foto/img/lenjer.png" alt="Pempek Lenjer">
                 </div>
               </div>
             </div>
@@ -126,7 +137,7 @@ if (!isset($_SESSION['user_name'])) {
                   <a href="menu.php" class="button">Pesan Sekarang <i class="ri-arrow-right-line"></i></a>
                 </div>
                 <div class="col-md-6 carousel-image">
-                  <img src="assets/img/lenggang.png" alt="Pempek Lenggang">
+                  <img src="../foto-foto/img/lenggang.png" alt="Pempek Lenggang">
                 </div>
               </div>
             </div>
@@ -135,11 +146,11 @@ if (!isset($_SESSION['user_name'])) {
               <div class="row align-items-center">
                 <div class="col-md-6">
                   <h2 class="carousel-title">Rujak Mie</h2>
-                  <p class="carousel-description">Merupakan campuran antara mie kuning, soun, tahu, timun, dan pempek, yang disiram dengan kuah cuko yang gurih dan pedas. </p>
+                  <p class="carousel-description">Merupakan campuran antara mie kuning, soun, tahu, timun, dan pempek, yang disiram dengan kuah cuko yang gurih dan pedas. </p>
                   <a href="menu.php" class="button">Pesan Sekarang <i class="ri-arrow-right-line"></i></a>
                 </div>
                 <div class="col-md-6 carousel-image">
-                  <img src="assets/img/rujakmie.png" alt="Rujak Mie">
+                  <img src="../foto-foto/img/rujakmie.png" alt="Rujak Mie">
                 </div>
               </div>
             </div>
@@ -165,118 +176,132 @@ if (!isset($_SESSION['user_name'])) {
         <h2 class="section__title">Pempek Favorit</h2>
 
         <div class="popular__container container grid">
+          <?php while ($row = mysqli_fetch_assoc($result)) : ?>
             <article class="popular__card">
-                <img src="assets/img/adaan.png" alt="popular image" class="popular__img" />
-                <h3 class="popular__name">Pempek Adaan</h3>
+                <img src="../foto-foto/foto-menu/<?= htmlspecialchars($row['gambar_menu']) ?>" alt="<?= htmlspecialchars($row['nama_menu']) ?>" class="popular__img" />
+                <h3 class="popular__name"><?= htmlspecialchars($row['nama_menu']) ?></h3>
                 <span class="popular__description">Pempek</span>
-                <span class="popular__price">Rp25.000</span>
+                <span class="popular__price">Rp<?= number_format($row['harga_menu'], 0, ',', '.') ?></span>
                 <div class="popular__buttons">
-                    <button class="popular__button">
+                    <form action="../proses-pelanggan/proses-tambah-keranjang.php" method="POST">
+                      <input type="hidden" name="id_menu" value="<?= $row['id_menu'] ?>">
+                      <button type="submit" class="popular__button" title="Tambah ke Keranjang">
                         <i class="ri-shopping-bag-line"></i>
-                    </button>
-                    <a href="menu_detail.php?id=adaan" class="popular__detail">
+                      </button>
+                    </form>
+                    <a href="menu_detail.php?id=<?= $row['id_menu'] ?>" class="popular__detail">
                         Detail <i class="ri-arrow-right-line"></i>
                     </a>
                 </div>
             </article>
-
-            <article class="popular__card">
-                <img src="assets/img/lenjer.png" alt="popular image" class="popular__img" />
-                <h3 class="popular__name">Pempek Lenjer</h3>
-                <span class="popular__description">Pempek</span>
-                <span class="popular__price">Rp30.000</span>
-                <button class="popular__button">
-                    <i class="ri-shopping-bag-line"></i>
-                </button>
-            </article>
-
-            <article class="popular__card">
-                <img src="assets/img/kriting.png" alt="popular image" class="popular__img" />
-                <h3 class="popular__name">Pempek Keriting</h3>
-                <span class="popular__description">Pempek</span>
-                <span class="popular__price">Rp35.000</span>
-                <button class="popular__button">
-                    <i class="ri-shopping-bag-line"></i>
-                </button>
-            </article>
-        </div>
+          <?php endwhile; ?>
+            
         <div class="view-all-menu">
             <a href="menu.php" class="button">
                 Lihat Semua Menu <i class="ri-arrow-right-line"></i>
             </a>
         </div>
-    </section>
+      </section>
 
      <!--==================== TESTIMONI ====================-->
+
+     <?php
+        include('../database/koneksi.php');
+
+        $query = "SELECT 
+            testimoni.id_testimoni,
+            testimoni.pesan,
+            testimoni.rating,
+            pelanggan.nama_pelanggan AS nama
+            FROM testimoni 
+            INNER JOIN pelanggan ON testimoni.id_pelanggan = pelanggan.id_pelanggan
+            ORDER BY testimoni.id_testimoni DESC";
+
+        $result = mysqli_query($koneksi, $query);
+     ?>
+
      <section class="testi section" id="testimoni">
         <div class="container">
             <span class="section__subtitle">Testimonial</span>
             <h2 class="section__title">Apa yang mereka katakan</h2>
             
             <div class="testi__container container grid">
-                <div class="testi__card">
-                    <div class="card__body">
-                        <p class="testi__name">Ivanna</p>
-                        <div class="testi__stars">
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                        </div>
-                        <p class="testi__comment">
-                            <i class="ri-double-quotes-l"></i>
-                            Pempeknya sangat enak, recommended deh yang ini!!
-                            <i class="ri-double-quotes-r"></i>
-                        </p>
-                    </div>
-                </div>
+              <?php while($row = mysqli_fetch_assoc($result)): ?>
 
                 <div class="testi__card">
                     <div class="card__body">
-                        <p class="testi__name">Asih </p>
+                        <p class="testi__name"><?= htmlspecialchars($row['nama']) ?></p>
                         <div class="testi__stars">
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-line"></i>
+                            <?php
+                                $rating = (int)$row['rating'];
+                                for ($i = 1; $i <= 5; $i++) {
+                                    if ($i <= $rating) {
+                                        echo '<i class="ri-star-fill"></i>';
+                                    } else {
+                                        echo '<i class="ri-star-line"></i>';
+                                    }
+                                }
+                            ?>
                         </div>
                         <p class="testi__comment">
                             <i class="ri-double-quotes-l"></i>
-                            Pempek yang paling enak yang pernah saya coba, rasanya otentik dan sangat lezat!
+                            <?= htmlspecialchars($row['pesan']) ?>
                             <i class="ri-double-quotes-r"></i>
                         </p>
                     </div>
-                </div>
-
-                <div class="testi__card">
-                    <div class="card__body">
-                        <p class="testi__name">Peter</p>
-                        <div class="testi__stars">
-                            <i class="ri-star-fill"></i>
-                            <i class="ri-star-line"></i>
-                            <i class="ri-star-line"></i>
-                            <i class="ri-star-line"></i>
-                            <i class="ri-star-line"></i>
-                        </div>
-                        <p class="testi__comment">
-                            <i class="ri-double-quotes-l"></i>
-                            Pempek ini teksturnya lembut dan lezat, sayang sekali waktu saya datang sudah habis.
-                            <i class="ri-double-quotes-r"></i>
-                        </p>
-                    </div>
-                </div>
+                </div>              
+                
+              <?php endwhile; ?>
+            </div>
+            <div class="view-all-menu">
+              <button class="button" data-bs-toggle="modal" data-bs-target="#testimoniModal">
+                <i class="ri-message-3-line"></i> Kirim Masukan
+              </button>
             </div>
         </div>
     </section>
+
+    <!--==================== MODAL TESTIMONI ====================-->
+    <div class="modal fade" id="testimoniModal" tabindex="-1" aria-labelledby="testimoniModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="testimoniModalLabel">Kirim Masukan</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="testimoniForm" action="../proses-pelanggan/submit-testimoni.php" method="POST">            
+              <div class="mb-3">
+                <label for="masukan" class="form-label">Masukan</label>
+                <textarea class="form-control" id="masukan" rows="3" name="masukan" required></textarea>
+              </div>
+              <div class="testi__rating mb-3">
+                <label class="form-label">Rating</label>
+                <div class="rating">
+                  <i class="ri-star-line" data-rating="1" role="button"></i>
+                  <i class="ri-star-line" data-rating="2" role="button"></i>
+                  <i class="ri-star-line" data-rating="3" role="button"></i>
+                  <i class="ri-star-line" data-rating="4" role="button"></i>
+                  <i class="ri-star-line" data-rating="5" role="button"></i>
+                </div>
+                <input type="hidden" name="rating" id="ratingInput" required>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="button button--ghost" data-bs-dismiss="modal">Tutup</button>
+            <button type="button" class="button button--ghost" id="submitTestimoni">Kirim</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!--==================== FOOTER ====================-->
     <footer class="footer">
       <div class="footer__container container grid">
         <div>
           <a href="#" class="footer__logo">
-            <img src="assets/img/Favicon.png" alt="footer image" />
+            <img src="../foto-foto/Favicon.png" alt="footer image" />
             Pempek Bersaudara
           </a>
           <p class="footer__description">
@@ -333,15 +358,16 @@ if (!isset($_SESSION['user_name'])) {
     </a>
 
     <!--=============== SCROLLREVEAL ===============-->
-    <script src="assets/js/scrollreveal.min.js"></script>
+    <script src="../javascript/scrollreveal.min.js"></script>
 
     <!--=============== MAIN JS ===============-->
-    <script src="assets/js/main.js"></script>
+    <script src="../javascript/main.js"></script>
     <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
-    
+    <!--========== Testimoni Script ==========-->
+    <script src="../javascript/submit-testimoni.js"></script>
     
     <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

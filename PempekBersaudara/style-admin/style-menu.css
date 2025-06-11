@@ -40,8 +40,9 @@
 }
 
 .halaman-menu .menu-content{
-    padding-top: 100px;
+    padding-top: 10px;
 }
+
 
 .sidebar.sidebar.close ~ .halaman-menu{
     left: 88px;
