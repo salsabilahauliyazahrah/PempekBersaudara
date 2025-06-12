@@ -1,9 +1,20 @@
+<?php
+
+    include '../database/koneksi.php';
+    include '../proses/grafik.php';
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style-admin/style-laporan.css">
+    <link rel="stylesheet" href="../style-admin/style-beranda.css">
+    <link rel="stylesheet" href="chart/css/bootstrap.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="chart/js/bootstrap.js"></script>
     <link rel="stylesheet" href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css'>
     <title>Laporan</title>
 </head>
@@ -66,9 +77,110 @@
 
                         </div>
                     </div>
+
+                    <div class="row">
+                        <!-- Grafik Penjualan -->
+                        <div class="col-6">                        
+                            <div class="card-chart">
+                            <h3 class="section-tittle">Grafik Penjualan</h3>
+                                <div class="card-header"></div>
+                                <div class="card-body">                              
+                                    <div id="chart1"></div>                                
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                    
                 </div>
             </div>
         </div>
     </div>
 </body>
 </html>
+
+
+
+<script>
+    const menuNames = <?php echo json_encode($menu_names); ?>;
+    const menuSales = <?php echo json_encode($menu_sales); ?>;
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    var options = {
+        series: [{
+            name: 'Favorite',
+            data: menuSales
+        }],
+        chart: {
+            height: 350,
+            type: 'bar',
+            width: '100%',
+        },
+        
+        colors: ['#00809D'], // <<< Warna batang bar chart
+        plotOptions: {
+            bar: {
+                borderRadius: 10,
+                dataLabels: {
+                    position: 'top',
+                },
+            }
+        },
+
+        dataLabels: {
+            enabled: true,
+            formatter: function (val) {
+                return val + "x";
+            },
+            offsetY: -20,
+            style: {
+                fontSize: '12px',
+                colors: ["#304758"]
+            }
+        },
+        xaxis: {
+            categories: menuNames,
+            position: 'bottom',
+            axisBorder: { show: false },
+            axisTicks: { show: false },
+            crosshairs: {
+                fill: {
+                    type: 'gradient',
+                    gradient: {
+                        colorFrom: '#D8E3F0',
+                        colorTo: '#BED1E6',
+                        stops: [0, 100],
+                        opacityFrom: 0.4,
+                        opacityTo: 0.5,
+                    }
+                }
+            },
+            tooltip: { enabled: true }
+        },
+        yaxis: {
+            axisBorder: { show: false },
+            axisTicks: { show: false },
+            labels: {
+                show: false,
+                formatter: function (val) {
+                    return val + "%";
+                }
+            }
+        },
+
+        grid: {
+            show: true,
+            yaxis: {
+                lines: {
+                    show: false
+                }
+            }
+        }
+
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart1"), options);
+    chart.render();
+});
+</script>

@@ -50,7 +50,6 @@
                     <table class="admin-table">
                         <thead>
                             <tr>
-                                <th>ID Admin</th>
                                 <th>Nama</th>
                                 <th>No Telepon</th>
                                 <th>Username</th>
@@ -60,7 +59,6 @@
                         <tbody>
                             <?php while ($row = $result->fetch_assoc()) { ?>
                             <tr>
-                                <td class="center"><?= $row['id_admin'] ?></td>
                                 <td class="center"><?= $row['nama_admin'] ?></td>
                                 <td class="center"><?= $row['no_telepon'] ?></td>
                                 <td class="center"><?= $row['username'] ?></td>

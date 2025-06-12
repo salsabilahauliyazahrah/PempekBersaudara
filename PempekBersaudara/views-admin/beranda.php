@@ -4,8 +4,15 @@
         header("Location: login.php");
         exit();
     }
+
+    include '../database/koneksi.php';
     include '../proses/testimoni.php';
+    include '../proses/grafik.php';
+
+
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -127,8 +134,8 @@
                                           </tr>
                                       </thead>
                                       <tbody>
-                                          <?php if (mysqli_num_rows($result) > 0): ?>
-                                              <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+                                          <?php if (mysqli_num_rows($result_testimoni) > 0): ?>
+                                              <?php while ($row = mysqli_fetch_assoc($result_testimoni)) : ?>
                                                   <tr>
                                                       <td class="center"><?= $row['rating']; ?></td>
                                                       <td class="center"><?= $row['tanggal_testimoni'] ?? '-' ?></td> 
@@ -159,11 +166,16 @@
 </html>
 
 <script>
+    const menuNames = <?php echo json_encode($menu_names); ?>;
+    const menuSales = <?php echo json_encode($menu_sales); ?>;
+</script>
+
+<script>
 document.addEventListener("DOMContentLoaded", function () {
     var options = {
         series: [{
             name: 'Favorite',
-            data: [10, 20, 30, 50, 100]
+            data: menuSales
         }],
         chart: {
             height: 350,
@@ -193,7 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         },
         xaxis: {
-            categories: ["Lenjer", "Kulit", "Kapal Selam", "Addan", "Pistel"],
+            categories: menuNames,
             position: 'bottom',
             axisBorder: { show: false },
             axisTicks: { show: false },

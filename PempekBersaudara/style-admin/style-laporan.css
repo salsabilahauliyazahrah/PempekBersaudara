@@ -32,7 +32,7 @@
 
 .laporan{
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
     left: 250px;
     width: calc(100% - 250px);
     background: var(--body-color);
@@ -41,6 +41,7 @@
 
 .laporan .laporan-content{
     padding-top: 10px;
+    padding-bottom: 40px;
 
 }
 
@@ -142,3 +143,5 @@
 .print-btn i {
     margin-right: 6px;
 }
+
+/* ============ Chart ============ */

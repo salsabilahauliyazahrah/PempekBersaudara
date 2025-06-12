@@ -19,5 +19,5 @@
     }
 
     $query .= " ORDER BY testimoni.id_testimoni DESC"; 
-    $result = mysqli_query($koneksi, $query);
+    $result_testimoni = mysqli_query($koneksi, $query);
 ?>

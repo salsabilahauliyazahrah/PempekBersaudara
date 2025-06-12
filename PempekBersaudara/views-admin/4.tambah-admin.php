@@ -1,3 +1,15 @@
+<?php 
+    session_start();
+    if (isset($_SESSION['errorMessage'])) {
+        echo "<div class='error'>" . $_SESSION['errorMessage'] . "</div>";
+        unset($_SESSION['errorMessage']);
+    }
+    if (isset($_SESSION['successMessage'])) {
+        echo "<div class='success'>" . $_SESSION['successMessage'] . "</div>";
+        unset($_SESSION['successMessage']);
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +20,7 @@
     <title>Tambah Admin</title>
 </head>
 <body>
-    <!-- Tambah menu.php -->
+    <!-- Tambah Admin.php -->
     <?php include('sidebar.php'); ?>
     <div class="halaman-tambahAdmin">
         <div class="tambah-content">
@@ -28,19 +40,23 @@
                 </div>
 
                 <div class="kolom-input">
-                    <form action="4.tambah-admin.php" method="post" enctype="multipart/form-data">
+                    <form action="../proses/regis.php" method="post" enctype="multipart/form-data">
                         <div class="left-section">
                             <label for="nama">Nama</label>
                             <input type="text" id="nama" name="nama" required>
 
                             <label for="no-telp">No Telepon</label>
-                            <input type="number" id="no-telp" name="no-telp" required>
+                            <input type="number" id="no-telp" name="telepon" required>
 
                             <label for="email">Username</label>
-                            <input type="text" id="email" name="email" required>
+                            <input type="text" id="email" name="username" required>
 
                             <label for="password">Password</label>
-                            <input type="password" id="password" name="password" required>
+                            <input type="password" name="password" id="password" required
+                            maxlength="8"
+                            pattern="^(?=.*[\W_]).{1,8}$"
+                            title="Password maksimal 8 karakter dan harus mengandung simbol atau karakter khusus">
+
 
                             <div class="buttons">
                                 <button type="submit" class="btn-submit">Submit</button>

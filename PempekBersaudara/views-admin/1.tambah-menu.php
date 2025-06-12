@@ -28,28 +28,63 @@
 
                 <div class="kolom-input">
                     <form action="../proses/1.tambah-menu.php" method="post" enctype="multipart/form-data">
-                        <div class="left-section">
-                            <label for="nama">Nama Menu</label>
-                            <input type="text" id="nama" name="nama" required>
+                        <!-- Tambah Gambar Menu -->
+                        <div class="card-section">
+                            <h3>Upload Gambar Menu</h3>
+                            <div class="upload-box" onclick="triggerFileInput()">
+                                <input type="file" id="gambar" name="gambar" required hidden>
 
-                            <label for="harga">Harga</label>
-                            <input type="number" id="harga" name="harga" required>
+                                <div class="defaultText">
+                                    <div class="icon-upload">
+                                        <i class='bx bx-image-add'></i>
+                                    </div>
+                                    <p><strong>Drop Image Menu Here, or <span class="browse-text">click to browse</span></strong></p>
+                                </div>
 
-                            <label for="qty">QTY</label>
-                            <input type="number" id="qty" name="qty" required>
-
-                            <div class="buttons">
-                                <button type="submit" class="btn-submit">Submit</button>
+                                <div id="previewContainer" style="display: none; position: relative;">
+                                    <img src="" alt="Preview Gambar" id="previewImage" style="max-width: 70%; border-radius: 10px;">
+                                    <div class="overlay" onclick="triggerFileInput()">Ganti Gambar?</div>
+                                </div>
+                                
                             </div>
                         </div>
 
-                        <div class="right-section">
-                            <label for="gambar">Gambar Menu</label>
-                            <input type="file" id="gambar" name="gambar" required>
+                        <!-- BAGIAN INPUT DATA MENU -->
+                         <div class="card-section">
+                            <div class="form-grid">
+                                <div class="left-section">
+                                    <label for="nama">Nama Menu</label>
+                                    <input type="text" id="nama" name="nama" required>
 
-                            <label for="deskripsi">Deskripsi Menu</label>
-                            <textarea name="deskripsi" id="deskripsi" required></textarea>
-                        </div>                        
+                                    <label for="harga">Harga</label>
+                                    <input type="number" id="harga" name="harga" required>
+
+                                    <label for="qty">QTY</label>
+                                    <input type="number" id="qty" name="qty" required>
+                                </div>
+
+                                <div class="right-section">
+                                    <label for="deskripsi">Deskripsi Menu</label>                                    
+                                    <textarea name="deskripsi" id="deskripsi" required></textarea>
+
+                                    <label for="deskripsi">Bahan-bahan</label>
+                                    <textarea name="bahanBahan" id="bahanBahan" required></textarea>
+
+                                    <label for="deskripsi">Detail</label>
+                                    <textarea name="detail" id="detail" required></textarea>
+
+                                </div>                            
+                            </div> 
+
+                            <!-- Tombol Submit -->
+                            <div class="buttons">
+                                <button type="submit" class="btn-submit">Submit</button>
+                                <button type="reset" class="btn-reset">Reset</button>
+                            </div>
+                         </div>
+
+
+
                     </form>
                 </div>
 
@@ -58,5 +93,6 @@
     </div>
 
     <script src="../javascript/script-trigger-add.js"></script>
+    <script src="../javascript/upload-priviewMenu.js"></script>
 </body>
 </html>
