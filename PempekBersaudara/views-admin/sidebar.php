@@ -1,3 +1,18 @@
+<?php
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    include('../database/koneksi.php');
+    $result_pending = mysqli_query($koneksi, "SELECT COUNT(*) AS jumlah FROM pesanan WHERE status = 'pending'");
+    $data_pending = mysqli_fetch_assoc($result_pending);
+    $jumlah_pending = $data_pending['jumlah'];
+
+    // ✅ Ambil dari session (yang sudah di-set saat login)
+    $nama_admin = $_SESSION['nama_admin'] ?? 'Admin';
+    $foto_admin = $_SESSION['foto_admin'] ?? 'default.png';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,13 +51,17 @@
                     <li class="nav-link">
                         <a href="menu.php">
                             <i class='bx bx-food-menu icon'></i>
-                            <span class="text nav-text">Menu</span>
+                            <span class="text nav-text">Menu</span>                           
                         </a>
                     </li>
                     <li class="nav-link">
                         <a href="pesanan.php">
                             <i class='bx bx-cart icon'></i>
                             <span class="text nav-text">Pesanan</span>
+                            <?php if ($jumlah_pending > 0): ?>
+                                <span class="notif-count"><?= $jumlah_pending ?></span>                                
+                            <?php endif; ?>
+
                         </a>
                     </li>
                     <li class="nav-link">
@@ -88,22 +107,9 @@
         </div>
     </nav>
 
-    <!-- Navbar -->
-    <div class="main-content">
-        <!-- Top Navbar -->
-        <nav class="top-navbar">
-            <div class="left-section">                
-            </div>
-            <div class="right-section">
-                <div class="profile-foto">
-                    <img src="../foto-foto/logo.png" alt="profile" class="profile-pic">
-                    <span class="profile-name">Admin</span>
-                </div>
-            </div>
-        </nav>
-    </div>
+</body>
+
 
     <script src="../javascript/script.js"></script>
 
-</body>
 </html>

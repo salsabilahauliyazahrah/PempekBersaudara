@@ -24,7 +24,7 @@ session_start();
                 <?php if(isset($_SESSION['register_success'])): ?>
                     <div class="success-message"><?php echo $_SESSION['register_success']; unset($_SESSION['register_success']); ?></div>
                 <?php endif; ?>
-				<input type="text" name="nama_pelanggan" placeholder="Username" required minlength="3" maxlength="50" />
+				<input type="text" name="nama" placeholder="Username" required minlength="3" maxlength="50" />
                 <input type="text" name="no_telepon" placeholder="Nomor Telpon" required pattern="[0-9]{10,15}" title="Nomor telepon harus 10-15 digit" />
 				<input type="email" name="email" placeholder="Email" required />
 				<input type="password" name="password" id="signupPassword" placeholder="Password" required minlength="8" 

@@ -1,42 +1,31 @@
 <?php
     session_start();
-    include '../database/koneksi.php';
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id_menu'])) {
-        $id_menu = mysqli_real_escape_string($koneksi, $_POST['id_menu']);
+    if (isset($_POST['id_menu'])) {
+        $id_menu = (int) $_POST['id_menu'];
 
-        $query = "SELECT * FROM menu WHERE id_menu = '$id_menu'";
-        $result = mysqli_query($koneksi, $query);
-        $menu = mysqli_fetch_assoc($result);
+        $redirect = $_SERVER['HTTP_REFERER'] ?? '../views-pelanggan/menu.php';
 
-        if ($menu) {
-            $item = [
-                'id_menu' => $menu['id_menu'],
-                'nama' => $menu['nama_menu'],
-                'harga' => $menu['harga_menu'],
-                'gambar' => $menu['gambar_menu'],
-                'jumlah' => 1
-            ];
-
-            if (!isset($_SESSION['cart'])) {
-                $_SESSION['cart'] = [];
-            }
-
-            $found = false;
-            foreach ($_SESSION['cart'] as $key => $cart_item) {
-                if ($cart_item['id_menu'] == $id_menu) {
-                    $_SESSION['cart'][$key]['jumlah'] += 1;
-                    $found = true;
-                    break;
-                }
-            }
-
-            if (!$found) {
-                $_SESSION['cart'][] = $item;
-            }
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
         }
-    }
 
-    header("Location: ../views-pelanggan/keranjang.php");
-    exit;
+        if (isset($_SESSION['cart'][$id_menu])) {
+            $_SESSION['cart'][$id_menu]++;
+        } else {
+            $_SESSION['cart'][$id_menu] = 1;
+        }
+        
+        // Set notifikasi
+        $_SESSION['notif'] = [
+            'title' => 'Item Ditambahkan',
+            'message' => 'Produk berhasil ditambahkan ke keranjang.',
+            'type' => 'success'
+        ];
+
+        header("Location: $redirect");
+        exit();
+    } else {
+        echo "ID menu tidak ditemukan.";
+    }
 ?>

@@ -1,0 +1,66 @@
+/* Order History Styling */
+.order__card {
+    background-color: var(--container-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+.order__header {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1rem;
+    }
+
+.order__info p,
+.order__payment p {
+    margin-bottom: 0.5rem;
+    }
+
+.order__items {
+    display: grid;
+    gap: 1rem;
+    }
+
+.order__item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--body-color);
+    border-radius: 0.5rem;
+    }
+
+.order__item-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    }
+
+.order__item-details h3 {
+    font-size: var(--normal-font-size);
+    margin-bottom: 0.25rem;
+    }
+
+.order__item-details p {
+    font-size: var(--small-font-size);
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+.order__header {
+        grid-template-columns: 1fr;
+    }
+    
+.order__payment {
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
+    }
+    }

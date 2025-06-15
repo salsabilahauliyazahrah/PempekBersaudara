@@ -24,7 +24,7 @@
             // Verify password using password_verify() to compare with hashed password
             if (password_verify($password, $user['password'])) {
                 $_SESSION['id_pelanggan'] = $user['id_pelanggan'];
-                $_SESSION['user_name'] = $user['nama_pelanggan'];
+                $_SESSION['user_name'] = $user['nama'];
                 
                 header("Location: ../views-pelanggan/index.php");
                 exit();

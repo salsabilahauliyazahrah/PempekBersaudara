@@ -183,3 +183,59 @@
     font-weight: bold;
     color: var(--text-color);
 }
+
+
+/* ============ Highlight Pesanan Pending ============ */
+.highlight-row {
+    background-color: #fff5f0; /* Warna lembut agar beda tapi tetap elegan */
+}
+
+/* ============ Button ============ */
+button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Efek timbul (3D look) */
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Tombol Konfirmasi */
+.btn-confirm {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-confirm:hover {
+    background-color: #45a049;
+}
+
+/* Tombol Tolak */
+.btn-reject {
+    background-color: #f44336;
+    color: white;
+}
+.btn-reject:hover {
+    background-color: #d32f2f;
+}
+
+/* Tombol Selesai Diproses */
+.btn-process {
+    background-color: #2196F3;
+    color: white;
+}
+.btn-process:hover {
+    background-color: #1976D2;
+}
+
+/* Agar tombol sejajar dan rapi */
+form button {
+    margin: 4px 2px;
+    font-size: 14px;
+}

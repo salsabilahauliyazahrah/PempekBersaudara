@@ -1,0 +1,91 @@
+/* Balance Amount Styling */
+.balance-amount {
+    background-color: var(--container-color);
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+.balance-amount .amount {
+    font-size: var(--h1-font-size);
+    font-weight: var(--font-semi-bold);
+    color: var(--first-color);
+    }
+
+    /* Quick Amount Buttons */
+.quick-amount-btn {
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--first-color);
+    background-color: transparent;
+    color: var(--title-color);
+    border-radius: 0.5rem;
+    font-weight: var(--font-medium);
+    transition: 0.3s;
+    }
+
+.quick-amount-btn:hover {
+    background-color: var(--first-color);
+    color: #fff;
+    }
+
+    /* Form Styling */
+.card {
+    background-color: var(--container-color);
+    border: none;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+.card-body {
+    padding: 2rem;
+    }
+
+.input-group-text {
+    background-color: var(--first-color);
+    color: #fff;
+    border: none;
+    }
+
+.form-control {
+    border: 1px solid var(--border-color);
+    }
+
+.form-control:focus {
+    border-color: var(--first-color);
+    box-shadow: none;
+    }
+
+    /* Response Messages */
+.alert {
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    }
+
+.alert-success {
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+    color: #0f5132;
+    }
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+    color: #842029;
+    }
+
+ /* Responsive Design */
+@media screen and (max-width: 576px) {
+.quick-amount-btn {
+        padding: 0.5rem;
+        font-size: var(--small-font-size);
+    }
+    
+.balance-amount {
+        padding: 1.5rem;
+    }
+    
+.card-body {
+        padding: 1.5rem;
+    }
+    }

@@ -1,3 +1,11 @@
+<?php
+    session_start();
+    if (!isset($_SESSION['id_admin'])) {
+        header("Location: login-admin.php"); // arahkan ke login kalau belum login
+        exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,23 +21,23 @@
         <div class="tambah-content">
             <div class="overview">
                 <div class="tittle">
-                    <i class='bx bx-plus'></i>
-                    <span class="text">Tambah Menu</span>                
+                    <!-- <i class='bx bx-plus'></i> -->
+                    <span class="text">Menu - Tambah Menu</span>                
                 </div>
 
                 <div class="top">
                     <div class="kembali">
-                        <a href="menu.php" class="btn-kembali">
-                            <i class='bx bx-arrow-back'></i>
+                        <a href="menu.php" class="btn-kembali" id="btnKembali">
+                            <!-- <i class='bx bx-arrow-back'></i> -->
                             Kembali
                         </a>
                     </div>
                 </div>
 
                 <div class="kolom-input">
-                    <form action="../proses/1.tambah-menu.php" method="post" enctype="multipart/form-data">
+                    <form id="form" action="../proses/1.tambah-menu.php" method="post" enctype="multipart/form-data">
                         <!-- Tambah Gambar Menu -->
-                        <div class="card-section">
+                        <div class="card-section insert-image">
                             <h3>Upload Gambar Menu</h3>
                             <div class="upload-box" onclick="triggerFileInput()">
                                 <input type="file" id="gambar" name="gambar" required hidden>
@@ -61,19 +69,16 @@
 
                                     <label for="qty">QTY</label>
                                     <input type="number" id="qty" name="qty" required>
-                                </div>
 
-                                <div class="right-section">
-                                    <label for="deskripsi">Deskripsi Menu</label>                                    
+                                    <label for="deskripsi">Deskripsi Menu</label>
                                     <textarea name="deskripsi" id="deskripsi" required></textarea>
 
-                                    <label for="deskripsi">Bahan-bahan</label>
+                                    <label for="bahanBahan">Bahan-bahan</label>
                                     <textarea name="bahanBahan" id="bahanBahan" required></textarea>
 
-                                    <label for="deskripsi">Detail</label>
+                                    <label for="detail">Detail</label>
                                     <textarea name="detail" id="detail" required></textarea>
-
-                                </div>                            
+                                </div>        
                             </div> 
 
                             <!-- Tombol Submit -->
@@ -83,8 +88,6 @@
                             </div>
                          </div>
 
-
-
                     </form>
                 </div>
 
@@ -92,6 +95,7 @@
         </div>
     </div>
 
+    <script src="../javascript/btn-kembali.js"></script>
     <script src="../javascript/script-trigger-add.js"></script>
     <script src="../javascript/upload-priviewMenu.js"></script>
 </body>

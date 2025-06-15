@@ -22,7 +22,7 @@
   align-self: center;
 }
 
-.cart__header .section__title {
+.cart_header .section_title {
   margin: 0;
 }
 
@@ -30,8 +30,7 @@
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 2rem;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  margin-top: 2rem;
 }
 
 /* Cart Items */
@@ -62,6 +61,8 @@
   padding: 0.5rem;
   border-radius: 0.5rem;
 }
+
+
 
 .cart__item-content {
   flex: 1;
@@ -106,19 +107,11 @@
 }
 
 .quantity-input {
-  width: 40px;
-  margin-left: 12px;
-  text-align: center; /* horizontal center */
-  line-height: 40px;  /* vertical center secara kasar */
+  width: 50px;
+  text-align: center;
   border: 1px solid var(--border-color);
   border-radius: 0.25rem;
   padding: 0.25rem;
-}
-
-.quantity-form {
-  display: flex;
-  align-items: center; /* sejajarkan secara vertikal */
-  gap: 0px; /* kasih jarak antar tombol dan input */
 }
 
 .cart__item-remove {

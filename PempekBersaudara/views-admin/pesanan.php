@@ -1,6 +1,11 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['id_admin'])) {
+        header("Location: login-admin.php"); // arahkan ke login kalau belum login
+        exit();
+    }
+    
     include('../database/koneksi.php');
-
     include('../proses/menampilkan-pesanan.php');
 ?>
 
@@ -56,13 +61,14 @@
                             </tr>
                         </thead>
                         <tbody>
+                        <audio id="notifSound" src="../foto-foto/mp3/notification.mp3" preload="auto"></audio>
                         <?php while($row = mysqli_fetch_assoc($result)) : ?>
-                            <tr>
+                            <tr class="<?= $row['status'] === 'pending' ? 'highlight-row' : '' ?>">
                                 <td class="center"><?= $row['id_transaksi']; ?></td>
                                 <td class="center"><?= $row['tanggal']; ?></td>
-                                <td><?= $row['nama_pelanggan']; ?></td>
+                                <td><?= $row['nama']; ?></td>
                                 <td><?= $row['daftar_pesanan']; ?></td>
-                                <td class="center"><?= $row['alamat_pengiriman']; ?></td>
+                                <td class="center"><?= $row['alamat_penerima']; ?></td>
                                 <td class="center">Rp <?= number_format($row['total_harga'], 0, ',', '.'); ?></td>
                                 <td class="center">Rp <?= number_format($row['ongkir'], 0, ',', '.'); ?></td>
                                 <td class="status"><?= ucfirst($row['status']); ?></td>
@@ -78,7 +84,7 @@
                                             <button class="btn-process" name="selesai_diproses">Pesanan Selesai Diproses</button>
 
                                         <?php elseif ($row['status'] == 'diantar') : ?>
-                                            span>Sedang diantar</span>
+                                            <span>Sedang diantar</span>
 
                                         <?php elseif ($row['status'] == 'selesai') : ?>
                                             <span>✔ Selesai</span>
@@ -100,4 +106,53 @@
         </div>
     </div>
 </body>
+
+    <script>
+        // Cek pesanan baru secara berkala
+        let lastPendingCount = parseInt(localStorage.getItem('lastPendingCount')) || 0;
+
+        function checkNewPendingOrders() {
+            fetch("../proses/cek_pesanan_baru.php")
+                .then(response => response.json())
+                .then(data => {
+                    const jumlahPending = data.jumlah_pending || 0;
+
+                    // Update tampilan jika ada elemen notif
+                    const notifEl = document.querySelector('.notif-count');
+                    if (notifEl) {
+                        notifEl.textContent = jumlahPending > 0 ? jumlahPending : '';
+                    }
+
+                    // Jika pending bertambah → mainkan suara
+                    if (jumlahPending > lastPendingCount) {
+                        const audio = document.getElementById('notifSound');
+                        if (audio) {
+                            audio.play().catch(err => {
+                                console.log('Gagal memutar audio:', err);
+                            });
+                        }
+                    }
+
+                    lastPendingCount = jumlahPending;
+                })
+                .catch(err => console.log("Fetch error:", err));
+        }
+
+        // 🟢 Unlock audio di klik pertama
+        document.addEventListener('click', () => {
+            const audio = document.getElementById('notifSound');
+            if (audio) {
+                audio.play().catch(() => {});
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        }, { once: true });
+
+        // Jalankan pertama kali
+        checkNewPendingOrders();
+
+        // Cek berkala setiap 7 detik
+        setInterval(checkNewPendingOrders, 7000);
+    </script>   
+
 </html>

@@ -2,32 +2,33 @@
   session_start();
   // Check if user is logged in
   if (!isset($_SESSION['user_name'])) {
-      header("Location: ../views-pelanggan/login.php");
+      header("Location: login.php");
       exit();
   }
 
   
   require '../database/koneksi.php';
   
-  $menu_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+  if (isset($_GET['id'])) {
+      $id_menu = (int) $_GET['id'];
+      $query = mysqli_query($koneksi, "SELECT * FROM menu WHERE id_menu = $id_menu");
 
-  if ($menu_id <= 0) {
-      header("Location: menu.php");
-      exit();
+      if ($query && mysqli_num_rows($query) > 0) {
+          $menu_item = mysqli_fetch_assoc($query);
+      } else {
+          echo "Menu tidak ditemukan.";
+          exit;
+      }
+  } else {
+      echo "ID menu tidak ditemukan.";
+      exit;
   }
 
-  $query = "SELECT * FROM menu WHERE id_menu = ?";
-  $stmt = $koneksi->prepare($query);
-  $stmt->bind_param("i", $menu_id);
-  $stmt->execute();
-  $result = $stmt->get_result();
-
-  if ($result->num_rows === 0) {
-    header("Location: menu.php");
-    exit();
+  $notif = null;
+  if (isset($_SESSION['notif'])) {
+      $notif = $_SESSION['notif'];
+      unset($_SESSION['notif']); // agar hanya muncul sekali
   }
-
-  $menu_item = $result->fetch_assoc();
 ?>
 
 <!DOCTYPE html>
@@ -65,13 +66,13 @@
               <a href="index.php#home" class="nav__link">Beranda</a>
             </li>
             <li class="nav__item">
-              <a href="index.php#menu" class="nav__link active-link">Menu</a>
+              <a href="menu.php" class="nav__link active-link">Menu</a>
             </li>
             <li class="nav__item">
               <a href="index.php#testimoni" class="nav__link">Testimoni</a>
             </li>
             <li class="nav__item">
-              <a href="index.php#recently" class="nav__link">Keranjang</a>
+              <a href="keranjang.php" class="nav__link">Keranjang</a>
             </li>
             <!-- User dropdown menu -->
             <li class="nav__item nav__user dropdown">
@@ -80,6 +81,12 @@
                 <i class="ri-arrow-down-s-line dropdown-icon"></i>
               </div>
               <div class="dropdown-content">
+                <a href="saldo.php" class="dropdown-item">
+                  <i class="ri-wallet-3-line"></i> Saldo
+                </a>
+                <a href="riwayat.php" class="dropdown-item active">
+                  <i class="ri-history-line"></i> Riwayat Pesanan
+                </a>
                 <a href="../proses-pelanggan/logout.php" class="dropdown-item">
                   <i class="ri-logout-box-line"></i> Logout
                 </a>
@@ -108,7 +115,7 @@
             <div class="row">
               <div class="col-md-6">
                 <div class="menu__detail-img">
-                  <img src="../foto-foto/foto-menu/<?php echo htmlspecialchars($menu_item['gambar_menu']); ?>" alt="<?php echo htmlspecialchars($menu_item['nama_menu']); ?>">
+                  <img src="../foto-foto/img/<?php echo htmlspecialchars($menu_item['gambar_menu']); ?>" alt="<?php echo htmlspecialchars($menu_item['nama_menu']); ?>">
                 </div>
               </div>
               <div class="col-md-6">
@@ -129,6 +136,7 @@
                         <div class="menu__detail-buttons">
                           <form action="../proses-pelanggan/proses-tambah-keranjang.php" method="POST">
                             <input type="hidden" name="id_menu" value="<?= htmlspecialchars($menu_item['id_menu']) ?>">
+                            <input type="hidden" name="redirect" value="../views-pelanggan/menu_detail.php?id=<?= htmlspecialchars($menu_item['id_menu']) ?>">
                             <button type="submit" class="button">
                               <i class="ri-shopping-bag-line"></i> Tambah ke Keranjang
                             </button>
@@ -210,5 +218,17 @@
 
     <!--=============== MAIN JS ===============-->
     <script src="../javascript/main.js"></script>
+    <script src="../javascript/cart.js"></script>
+
+    <?php if (isset($_SESSION['notif'])): ?>
+      <script>
+        showNotification(
+          "<?= addslashes($_SESSION['notif']['title']) ?>",
+          "<?= addslashes($_SESSION['notif']['message']) ?>",
+          "<?= $_SESSION['notif']['type'] ?>"
+        );
+      </script>
+      <?php unset($_SESSION['notif']); ?>
+    <?php endif; ?>    
   </body>
 </html>

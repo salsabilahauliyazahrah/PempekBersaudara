@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:wght@500;600&family=Poppins:wght@400;500&display=swap");
+
 
 *{
     font-family: "Poppins", sans-serif;
@@ -35,10 +38,12 @@
     width: calc(100% - 250px);
     background: var(--body-color);
     transition: var(--tran-05);
+    justify-content: center;
+    align-items: center;
 }
 
 .halaman-editMenu .edit-content{
-    padding-top: 100px;
+    padding-top: 10px;
 }
 
 .sidebar.sidebar.close ~ .halaman-editMenu{
@@ -47,13 +52,14 @@
 }
 
 .edit-content .tittle{
-    display: flex;
-    align-items: center;
+    display: grid;
+    place-items: center;
     font-size: 30px;
-    font-weight: 600;
+    font-family: "Lora", serif;
+    font-weight: 400;
     color: var(--text-color);
     padding: 8px 40px;
-    margin: 20px 1 30px 0;
+    margin: 20px 1rem 30px 0;
 }
 
 .edit-content .tittle i{
@@ -66,26 +72,30 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;   
+    font-size: 24px;  
 }
 
 .edit-content  .tittle .text{
-    font-size: 28px;
+    font-size: 50px;
     font-weight: 600;
     color: var(--text-color);
     margin-left: 10px;
+    font-family: "Dancing Script", cursive;
+    text-shadow: 2px 2px 4px #F6F8D5;
 }
+
 
 /* ============ button kembaali ============ */
 .top{
     display: flex;
     width: 100%;
     align-items: center;
+    justify-content: center;
     gap: 20px;
+    margin-top: -45px;
     margin-bottom: 9px;
     padding: 1px 40px;
     box-sizing: border-box;
-    justify-content: space-between;
 }
 
 .top a.btn-kembali{
@@ -97,8 +107,8 @@
 }
 
 a.btn-kembali{
-    background-color: #5cb85c;
-    color: white;
+    /*background-color: #5cb85c; */
+    color: #6A9C89;
     padding: 11px 10px;
     text-decoration: none;
     line-height: 1;
@@ -122,69 +132,165 @@ a.btn-kembali{
 }
 
 /* ============ input menu ============ */
+
 .kolom-input{
-    width: 90%;
+    width: 100%;
+    max-width: 1200px;
     margin: 30px auto;
     padding: 30px;
-    background-color: var(--sidebar-color);
     border-radius: 10px;
-    display: flex;
-    justify-content: center;
 
 }
 
 .kolom-input form{
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 40px;
     width: 100%;
-    max-width: 1200px;
+    max-width: 100%;
 }
 
+.form-grid {
+    display: flex;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+}
+
+.card-section {
+    border-radius: 15px;
+    padding: 30px;
+    background: #fff;
+    margin-bottom: -10px;
+    margin-top: -10px;
+    flex: 1;
+    box-shadow: 0 12px 30px rgba(193, 216, 195, 0.6);
+}
+
+.card-section.insert-image {
+    margin-top: -35px;
+    margin-bottom: 5px;
+}
+
+.card-section h3 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: var(--primary-color);
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* ============ input gambar menu ============ */
+
+.upload-box {
+    border: 2px dashed #aaa;
+    padding: 30px;
+    text-align: center;
+    color: #666;
+    background: #f9f9f9;
+    border-radius: 8px;
+    position: relative;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.upload-box .browse-text {
+    color: orange;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.upload-box:hover {
+    border-color: #426D6D;
+}
+
+.defaultText .icon-upload {
+    font-size: 50px;
+    color: orange;
+    margin-bottom: -10px;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.3s;
+    border-radius: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+#previewContainer:hover .overlay {
+    opacity: 1;
+}
+
+.form-container {
+    width: 90%;
+    margin: 30px auto;
+}
+
+/* ============ input data menu ============ */
 .left-section,
 .right-section{
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
     flex: 1;
-    min-width: 300px;
 }
 
 .left-section label{
     display: block;
     font-weight: bold;
-    margin-top: 20px;
+    margin-top: 5px;
+    margin-bottom: -23px;
     color: var(--primary-color);
-    font-size: 18px;
+    font-size: 20px;
 }
 
-.right-section label{
-    display: block;
-    font-weight: bold;
-    margin-top: 20px;
-    color: var(--primary-color);
-    font-size: 18px;
+.right-section  textarea{
+    height: 45px;
+    max-height: 150px;
+    resize: vertical;
 }
 
 
 input[type="text"],
 input[type="number"],
-input[type="file"],
 textarea{
     width: 100%;
     padding: 10px;
     margin-top: 5px;
     border: 2px solid #3b5b5b;
-    border-radius: 4px;
+    border-radius: 9px;
     background-color: var(--body-color);
 }
 
-textarea{
-    height: 150px;
-    resize: none;
+input[type="file"] {
+    background-color: #f9f9f9;
+    padding: 40px;
+    text-align: center;
+    cursor: pointer;
 }
 
+.upload-box input[type="file"] {
+    cursor: pointer;
+}
+
+
 .buttons{
-    margin-top: 20px;
     display: flex;
+    justify-content: flex-end;
     gap: 20px;
+    margin-top: 30px;
 }
 
 .kolom-input .buttons{
@@ -193,19 +299,19 @@ textarea{
     gap: 20px;
 }
 
-.kolom-input .form{
-    max-width: 1000px;
-    margin: auto;
-}
-
 .btn-submit{
     background-color: #C1F5CA;
     color: var(--text-color);
-    padding: 10px 30px;
+    padding: 12px 25px;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #e85a2f;
 }
 
 .btn-reset{
@@ -213,35 +319,71 @@ textarea{
     color: var(--text-color);
     padding: 10px 30px;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* ============ Modal ============ */
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.modal-content{
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.modal-content i{
+    font-size: 48px;
+    color: #e74c3c;
+    margin-bottom: 15px;
+}
+
+.modal-buttons{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.modal-buttons .btn-yakin,
+.modal-buttons .btn-tidak {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
     cursor: pointer;
 }
 
-/* ============ gambar menu ============ */
-.tampilin-gambar {
-    width: 150px;
-    height: 150px;
-    border: 1px solid #3f5959;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.modal-buttons .btn-yakin {
+    background-color: #5cb85c;
+    color: white;
 }
 
-.tampilin-gambar img {
-    width: 135px;
-    height: 135px;
-    object-fit: cover;
+.modal-buttons .btn-tidak {
+    background-color: #d9534f;
+    color: white;
 }
 
-.gambar-input-wrapper{
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    flex-wrap: wrap;
-}
 
-.gambar-input-wrapper input[type="file"] {
-    flex: 1;
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
 }

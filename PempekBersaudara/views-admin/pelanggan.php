@@ -48,7 +48,7 @@
                         <?php while ($row = mysqli_fetch_assoc($result)) : ?>
                             <tr>
                                 <td class="center"><?= htmlspecialchars($row['id_pelanggan']) ?></td>
-                                <td class="center"><?= htmlspecialchars($row['nama_pelanggan']) ?></td>
+                                <td class="center"><?= htmlspecialchars($row['nama']) ?></td>
                                 <td class="center"><?= htmlspecialchars($row['no_telepon']) ?></td>
                                 <td class="center"><?= htmlspecialchars($row['email']) ?></td>
                                 

@@ -1,3 +1,4 @@
+
 /*=============== GOOGLE FONTS ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Lora:wght@500;600&family=Poppins:wght@400;500&display=swap");
 
@@ -32,7 +33,7 @@
   --font-medium: 500;
   --font-semi-bold: 600;
 
-  /*========== z index ==========*/
+  /*========= z index ==========*/
   --z-tooltip: 10;
   --z-fixed: 100;
 }
@@ -573,10 +574,10 @@ body.dark-theme {
   width: 220px;
   position: absolute;
   inset: 0;
-  top: -2.5rem;
+  top: -3rem; 
   margin: 0 auto;
   transition: transform 0.4s;
-  padding: 1rem;
+  padding: 3rem;
   /*background-color: #ffffff;*/
   border-radius: 1rem;
   /*box-shadow: 0 4px 12px hsla(20, 65%, 50%, 0.08);*/
@@ -587,7 +588,7 @@ body.dark-theme {
   transform: translateY(-0.5rem);
 }
 
-.popular__card:hover .popular__img {
+.popular_card:hover .popular_img {
   transform: translateY(-0.5rem);
 }
 
@@ -601,12 +602,11 @@ body.dark-theme {
 .popular__button {
   display: flex;
   padding: 0.5rem;
-  border-radius: 50%;
+  border-radius: 45%;
   border: none;
   outline: none;
   cursor: pointer;
-  background-color: var(--first-color);
-  color: #fff;
+  color: #000000;
   font-size: 1.3rem;
   transition: all 0.3s;
 }
@@ -843,7 +843,7 @@ body.dark-theme {
 ::-webkit-scrollbar-thumb:hover {
   background-color: hsl(20, 8%, 55%);
 }
-/*=============== SCROLL UP ===============*/
+/* =============== SCROLL UP =============== */
 .scrollup {
   position: fixed;
   right: 1rem;
@@ -1392,7 +1392,7 @@ body.dark-theme {
   background-color: var(--first-color);
 }
 
-.nav__user-menu:hover .nav__user-greeting,
+.nav_user-menu:hover .nav_user-greeting,
 .nav__user-menu:hover .dropdown-icon {
   color: #fff;
 }
@@ -1541,6 +1541,36 @@ body.dark-theme {
     }
 }
 
+/* Add this to your styles.css file */
+.rating {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.rating i {
+    font-size: 1.5rem;
+    color: #cccccc;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.rating i:hover,
+.rating i.active {
+    color: #ffd700;
+}
+
+.rating i:hover ~ i {
+    color: #cccccc;
+}
+
+.rating:hover i {
+    color: #ffd700;
+}
+
+.rating:hover i:hover ~ i {
+    color: #cccccc;
+}
+
 /* Menu Styles */
 .popular__container {
     grid-template-columns: repeat(3, 1fr);
@@ -1569,7 +1599,7 @@ body.dark-theme {
 }
 
 .menu__detail-img {
-  /*background-color: #ffffff;*/
+ /*background-color: #ffffff;*/
   padding: 2rem;
   border-radius: 1rem;
   margin-bottom: 2rem;
@@ -1628,4 +1658,20 @@ body.dark-theme {
 .button--ghost:hover {
   background-color: var(--first-color);
   color: #fff;
+}
+
+.view-all-menu {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.view-all-menu .button {
+  padding: 1rem 2rem;
+  transition: background-color 0.3s;
+  border: none;
+}
+
+.view-all-menu .button:hover {
+  background-color: var(--first-color-alt);
 }

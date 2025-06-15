@@ -2,8 +2,15 @@
   session_start();
   // Check if user is logged in
   if (!isset($_SESSION['user_name'])) {
-      header("Location: ../views-pelanggan/login.php");
+      header("Location: login.php");
       exit();
+  }
+
+  //untuk notifikasi
+  $notif = null;
+  if (isset($_SESSION['notif'])) {
+      $notif = $_SESSION['notif'];
+      unset($_SESSION['notif']); // agar hanya muncul sekali
   }
 ?>
 
@@ -25,6 +32,7 @@
 
     <!--=============== CSS ===============-->
     <link rel="stylesheet" href="../style-pelanggan/styles-index.css" />
+    <link rel="stylesheet" href="../style-pelanggan/notification.css" />
 
     <title>Menu - Pempek Bersaudara</title>
   </head>
@@ -60,10 +68,16 @@
                 <i class="ri-arrow-down-s-line dropdown-icon"></i>
               </div>
               <div class="dropdown-content">
+                <a href="saldo.php" class="dropdown-item">
+                  <i class="ri-wallet-3-line"></i> Saldo
+                </a>
+                <a href="riwayat.php" class="dropdown-item active">
+                  <i class="ri-history-line"></i> Riwayat Pesanan
+                </a>
                 <a href="../proses-pelanggan/logout.php" class="dropdown-item">
                   <i class="ri-logout-box-line"></i> Logout
                 </a>
-              </div>
+              </div>  
             </li>
             <li class="nav__item">
               <i class="ri-moon-line change-theme" id="theme-button"></i>
@@ -84,6 +98,7 @@
     <!--==================== MAIN ====================-->
     <main class="main">
       <!--==================== ALL MENU ====================-->
+      <?php include('../proses/menu.php'); ?>
       <section class="popular section" id="menu">
         <span class="section__subtitle">Menu Lengkap</span>
         <h2 class="section__title">Semua Jenis Pempek</h2>
@@ -102,15 +117,22 @@
                 $nama = $row['nama_menu'];
                 $harga = $row['harga_menu'];
                 $gambar = $row['gambar_menu'];
+                $jumlah_tersedia = $row['jumlah_tersedia'];
         ?>
             <article class="popular__card">
-              <img src="../foto-foto/foto-menu/<?php echo htmlspecialchars($gambar); ?>" alt="<?php echo htmlspecialchars($nama); ?>" class="popular__img" />
+              <img src="../foto-foto/img/<?php echo htmlspecialchars($gambar); ?>" alt="<?php echo htmlspecialchars($nama); ?>" class="popular__img" />
               <h3 class="popular__name"><?php echo htmlspecialchars($nama); ?></h3>
               <span class="popular__price">Rp<?php echo number_format($harga, 0, ',', '.'); ?></span>
+              <br>
+              <span> Stok Tersedia: <?php echo $jumlah_tersedia; ?></span>
               <div class="popular__buttons">
-                  <button class="popular__button">
+                <form method="POST" action="../proses-pelanggan/proses-tambah-keranjang.php">
+                  <input type="hidden" name="id_menu" value="<?php echo $id; ?>">
+                  <input type="hidden" name="redirect" value="../views-pelanggan/menu.php">
+                  <button type="submit" class="popular__button" title="Tambah ke Keranjang">
                     <i class="ri-shopping-bag-line"></i>
                   </button>
+                </form>
                   <a href="menu_detail.php?id=<?php echo $id; ?>" class="popular__detail">
                       Detail <i class="ri-arrow-right-line"></i>
                   </a>
@@ -192,5 +214,30 @@
 
     <!--=============== MAIN JS ===============-->
     <script src="../javascript/main.js"></script>
+    <script src="../javascript/cart.js"></script>
+    <script>
+      document.querySelectorAll('.popular__button').forEach(button => {
+        button.addEventListener('click', function() {
+          const card = this.closest('.popular__card');
+          const name = card.querySelector('.popular__name').textContent;
+          const price = card.querySelector('.popular__price').textContent;
+          addToCart(name, price);
+        });
+      });
+    </script>
+
+    <?php if ($notif): ?>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        showNotification(
+          "<?= addslashes($notif['title']) ?>",
+          "<?= addslashes($notif['message']) ?>",
+          "<?= $notif['type'] ?>"
+        );
+      });
+    </script>
+    <?php endif; ?>      
+
+
   </body>
 </html>

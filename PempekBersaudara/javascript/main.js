@@ -112,6 +112,12 @@ userMenu.addEventListener('click', () => {
   navUser.classList.toggle('show-dropdown')
 })
 
+document.addEventListener('click', (e) => {
+  if (!navUser.contains(e.target)) {
+    navUser.classList.remove('show-dropdown')
+  }
+})
+
 // Close dropdown when clicking outside
 document.addEventListener('click', (e) => {
   if (!navUser.contains(e.target)) {

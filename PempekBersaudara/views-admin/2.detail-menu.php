@@ -1,4 +1,9 @@
 <?php
+    session_start();
+    if (!isset($_SESSION['id_admin'])) {
+        header("Location: login-admin.php"); // arahkan ke login kalau belum login
+        exit();
+    }
     include '../database/koneksi.php';
     include '../proses/4.detail-menu.php';
 ?>

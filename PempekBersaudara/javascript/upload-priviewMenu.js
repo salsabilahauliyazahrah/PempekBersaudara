@@ -23,6 +23,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+    // Reset tombol
+    const resetButton = document.querySelector('.btn-reset');
+    resetButton.addEventListener('click', function () {
+        fileInput.value = ''; 
+        preview.src = ''; 
+        previewContainer.style.display = 'none'; 
+        defaultText.style.display = 'block'; 
+    });    
+
     gantiGambar.addEventListener('click', (e) => {
         e.stopPropagation(); // supaya tidak trigger uploadBox lagi
         fileInput.click();

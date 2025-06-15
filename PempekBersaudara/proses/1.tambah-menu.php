@@ -12,7 +12,7 @@
         // Upload gambar
         $gambar_name = $_FILES['gambar']['name'];
         $gambar_tmp = $_FILES['gambar']['tmp_name'];
-        $uploadDir = "../foto-foto/foto-menu/";
+        $uploadDir = "../foto-foto/img/";
 
         if (!empty($gambar_name)) {
             move_uploaded_file($gambar_tmp, $uploadDir . $gambar_name);

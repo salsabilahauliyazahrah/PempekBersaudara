@@ -1,4 +1,11 @@
 <?php
+
+    session_start();
+    if (!isset($_SESSION['id_admin'])) {
+        header("Location: login-admin.php"); // arahkan ke login kalau belum login
+        exit();
+    }
+
     include '../database/koneksi.php';
     include '../proses/menu.php';
 
@@ -70,7 +77,7 @@
                                 <td class="center"><?= $menu['nama_menu'] ?></td>
                                 <td class="center">Rp <?= number_format($menu['harga_menu'], 0, ',', '.') ?></td>
                                 <td class="center"><?= $menu['jumlah_tersedia'] ?></td>
-                                <td class="center"><img src="../foto-foto/foto-menu/<?= $menu['gambar_menu'] ?>" width="80"></td>
+                                <td class="center"><img src="../foto-foto/img/<?= $menu['gambar_menu'] ?>" width="80"></td>
                                 <td class="center"><?= $menu['total_terjual'] ?></td>
                                 <td class="center">
                                     <div class="action-button">  

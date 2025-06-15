@@ -1,4 +1,11 @@
 <?php
+
+    session_start();
+    if (!isset($_SESSION['id_admin'])) {
+        header("Location: login-admin.php"); // arahkan ke login kalau belum login
+    exit();
+    }
+
     include '../database/koneksi.php';
     
     if (isset($_GET['id'])) {
@@ -35,52 +42,72 @@
         <div class="edit-content">
             <div class="overview">
                 <div class="tittle">
-                    <i class='bx bx-edit'></i> 
-                    <span class="text">Edit Menu</span>  
+                    <!-- <i class='bx bx-edit'></i>  -->
+                    <span class="text">Menu - Edit Menu</span>  
                 </div>
 
                 <div class="top">
                     <div class="kembali">
-                        <a href="menu.php" class="btn-kembali">
-                            <i class='bx bx-arrow-back'></i>
+                        <a href="menu.php" class="btn-kembali" id="btnKembali">
+                           <!-- <i class='bx bx-arrow-back'></i> -->
                             kembali
                         </a>
                     </div>
                 </div>
 
                 <div class="kolom-input">
-                    <form action="../proses/3.edit-menu.php" method="post" enctype="multipart/form-data">
+                    <form id="form" action="../proses/3.edit-menu.php" method="post" enctype="multipart/form-data" onsubmit="return konfirmasiUpdate();">
                         <input type="hidden" name="id_menu" value="<?= $menu['id_menu'] ?>">
-                        <div class="left-section">
-                            <label for="nama">Nama Menu</label>
-                            <input type="text" id="nama" name="nama" value="<?= $menu['nama_menu'] ?>">
 
-                            <label for="harga">Harga</label>
-                            <input type="number" id="harga" name="harga" value="<?= $menu['harga_menu'] ?>">
-
-                            <label for="qty">QTY</label>
-                            <input type="number" id="qty" name="qty" value="<?= $menu['jumlah_tersedia'] ?>">
-
-                            <div class="buttons">
-                                <button type="submit" class="btn-submit">Update</button>
+                        <!-- Upload Gambar -->
+                        <div class="card-section insert-image">
+                            <h3>Gambar Menu</h3>
+                            <div class="upload-box" onclick="triggerFileInput()">
+                                <input type="file" id="gambar" name="gambar" hidden>
                                 
+                                <div class="defaultText" style="<?= !empty($menu['gambar_menu']) ? 'display:none;' : '' ?>">
+                                    <div class="icon-upload">
+                                        <i class='bx bx-image-add'></i>
+                                    </div>
+                                    <p><strong>Drop Image Menu Here, or <span class="browse-text">click to browse</span></strong></p>
+                                </div>
+
+                                <div id="previewContainer" style="<?= empty($menu['gambar_menu']) ? 'display:none;' : '' ?> position: relative;">
+                                    <img src="../foto-foto/img/<?= $menu['gambar_menu'] ?>" alt="Preview Gambar" id="previewImage" style="max-width: 70%; border-radius: 10px;">
+                                    <div class="overlay" onclick="triggerFileInput()">Ganti Gambar?</div>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="right-section">                        
+                        <!-- Input Data -->
+                        <div class="card-section">
+                            <div class="form-grid">
+                                <div class="left-section">
+                                    <label for="nama">Nama Menu</label>
+                                    <input type="text" id="nama" name="nama" value="<?= $menu['nama_menu'] ?>" required>
 
-                            <label for="gambar">Gambar Menu</label>
-                            <div class="gambar-input-wrapper">
-                                <div class="tampilin-gambar">
-                                    <?php if (!empty($menu['gambar_menu'])): ?>
-                                        <img src="../foto-foto/foto-menu/<?=$menu['gambar_menu'] ?>" alt="Gambar Menu" width="150">
-                                    <?php endif; ?>
+                                    <label for="harga">Harga</label>
+                                    <input type="number" id="harga" name="harga" value="<?= $menu['harga_menu'] ?>" required>
+
+                                    <label for="qty">QTY</label>
+                                    <input type="number" id="qty" name="qty" value="<?= $menu['jumlah_tersedia'] ?>" required>
+
+                                    <label for="deskripsi">Deskripsi Menu</label>
+                                    <textarea name="deskripsi" id="deskripsi"><?= $menu['deskripsi_menu'] ?></textarea>
+
+                                    <label for="bahanBahan">Bahan-bahan</label>
+                                    <textarea name="bahanBahan" id="bahanBahan"><?= $menu['bahan_bahan'] ?? '' ?></textarea>
+
+                                    <label for="detail">Detail</label>
+                                    <textarea name="detail" id="detail"><?= $menu['detail'] ?? '' ?></textarea>
                                 </div>
-                                <input type="file" id="gambar" name="gambar"> 
-                            </div>                                                   
+                            </div>
 
-                            <label for="deskripsi">Deskripsi Menu</label>
-                            <textarea name="deskripsi" id="deskripsi"><?= $menu['deskripsi_menu'] ?></textarea>
+                            <!-- Tombol -->
+                            <div class="buttons">
+                                <button type="submit" class="btn-submit">Update</button>
+                                <a href="menu.php" class="btn-reset">Batal</a>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -89,4 +116,13 @@
     </div>
     
 </body>
+
+<script src="../javascript/btn-kembali(edit).js"></script>
+
+<script>
+    function konfirmasiUpdate() {
+        return confirm("Apakah Anda yakin ingin memperbarui menu ini?");
+    }
+</script>
+
 </html>

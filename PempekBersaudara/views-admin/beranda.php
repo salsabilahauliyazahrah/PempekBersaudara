@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="boxes">
-                    <div class="box box1">
+                    <div class="box box1" onclick="location.href='pelanggan.php'">
                         <i class='bx bx-group'></i>
                         <div class="box-content">
                           <span class="text">Pelanggan</span>
@@ -60,7 +60,7 @@
                           </span>
                         </div>                        
                     </div>
-                    <div class="box box2">
+                    <div class="box box2" onclick="location.href='admin.php'">
                         <i class='bx bx-group'></i>
                         <div class="box-content">
                           <span class="text">Admin</span>
@@ -74,28 +74,28 @@
                           </span>
                         </div>
                     </div>
-                    <div class="box box3">
+                    <div class="box box3" onclick="location.href='pesanan.php'">
                         <i class='bx bx-group'></i>
                         <div class="box-content">
                           <span class="text">Total Pesanan</span>
                           <span class="number">
                               <?php 
                                   include '../database/koneksi.php';
-                                  $query = mysqli_query($koneksi, "SELECT COUNT(*) AS total FROM pesanan");
+                                  $query = mysqli_query($koneksi, "SELECT COUNT(*) AS total FROM pesanan WHERE status = 'selesai'");
                                   $data = mysqli_fetch_assoc($query);
                                   echo $data['total'] ?? 0; //menampilkan 0 jika null
                               ?>
                           </span>
                         </div>
                     </div>
-                    <div class="box box4">
+                    <div class="box box4" onclick="location.href='pesanan.php'">
                         <i class='bx bx-group'></i>
                         <div class="box-content">
                           <span class="text">Pesanan Diproses</span>
                           <span class="number">
                               <?php 
                                   include '../database/koneksi.php';
-                                  $query = mysqli_query($koneksi, "SELECT COUNT(*) AS total FROM pesanan");
+                                  $query = mysqli_query($koneksi, "SELECT COUNT(*) AS total FROM pesanan WHERE status = 'diproses'");
                                   $data = mysqli_fetch_assoc($query);
                                   echo $data['total'] ?? 0; //menampilkan 0 jika null
                               ?>

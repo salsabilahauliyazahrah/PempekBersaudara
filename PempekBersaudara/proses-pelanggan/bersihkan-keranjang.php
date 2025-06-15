@@ -1,6 +1,11 @@
 <?php
     session_start();
-    unset($_SESSION['cart']);
-    header("Location: ../views-pelanggan/keranjang.php");
+    $id_menu = $_GET['id_menu'];
+
+    if (isset($_SESSION['cart'][$id_menu])) {
+        unset($_SESSION['cart'][$id_menu]);
+    }
+
+    header('Location: ../views-pelanggan/menu.php');
     exit;
 ?>

@@ -5,7 +5,7 @@
 
     $where = "";
     if (!empty($search)) {
-        $where = "WHERE pl.nama_pelanggan LIKE '%$search%'
+        $where = "WHERE pl.nama LIKE '%$search%'
         OR m.nama_menu LIKE '%$search%' 
         OR p.id_transaksi LIKE '%$search%'";
     }
@@ -13,8 +13,8 @@
     $query = "SELECT 
                 p.id_transaksi,
                 DATE_FORMAT(p.tanggal_transaksi, '%d/%m/%Y') AS tanggal,
-                pl.nama_pelanggan,
-                p.alamat_pengiriman,
+                pl.nama,
+                p.alamat_penerima,  
                 p.total_harga,
                 p.ongkir,
                 p.status,

@@ -1,10 +1,5 @@
 <?php
-  session_start();
-  if (!isset($_SESSION['user_name'])) {
-      header("Location: ../views-pelanggan/login.php");
-      exit();
-  }
-
+  session_start(); 
   include '../database/koneksi.php';
 
   $query = "SELECT * FROM menu"; 
@@ -71,13 +66,37 @@
             <!-- User dropdown menu -->
             <li class="nav__item nav__user dropdown">
               <div class="nav__user-menu" id="userMenu">
-                <span class="nav__user-greeting">Hi, <?php echo $_SESSION['user_name']; ?></span>
+                <span class="nav__user-greeting">Hi, 
+                  <?php  
+                  if (isset($_SESSION['user_name'])) {
+                    echo htmlspecialchars($_SESSION['user_name']);
+                  } else {
+                    echo "Tamu";
+                  }
+                  ?>
+                </span>
                 <i class="ri-arrow-down-s-line dropdown-icon"></i>
               </div>
               <div class="dropdown-content">
-                <a href="../proses-pelanggan/logout.php" class="dropdown-item">
-                  <i class="ri-logout-box-line"></i> Logout
-                </a>
+                  <?php if(isset($_SESSION['user_name'])): ?>
+                    
+                  <a href="saldo.php" class="dropdown-item">
+                    <i class="ri-wallet-3-line"></i> Saldo
+                  </a>
+
+                  <a href="riwayat.php" class="dropdown-item">
+                    <i class="ri-history-line"></i> Riwayat Pesanan
+                  </a>
+
+                  <a href="../proses-pelanggan/logout.php" class="dropdown-item">
+                    <i class="ri-logout-box-line"></i> Logout
+                  </a>
+
+                  <?php else: ?>
+                    <a href="login.php" class="dropdown-item">
+                      <i class="ri-login-box-line"></i> Login
+                    </a>
+                  <?php endif; ?>
               </div>
             </li>
             <!-- Theme toggle aligned with menu -->
@@ -90,8 +109,8 @@
             <i class="ri-close-line"></i>
           </div>
 
-          <img src="assets/img/leaf-branch-4.png" alt="leaf image" class="nav__img-1" />
-          <img src="assets/img/leaf-branch-3.png" alt="leaf image" class="nav__img-2" />
+          <img src="../foto-foto/leaf-branch-4.png" alt="leaf image" class="nav__img-1" />
+          <img src="../foto-foto/leaf-branch-3.png" alt="leaf image" class="nav__img-2" />
         </div>
 
         <!-- Toggle button for mobile -->
@@ -171,36 +190,33 @@
       <!--==================== ABOUT ====================-->
   
       <!--==================== MENU ====================-->
+      <?php include('../proses-pelanggan/pempek-favorite.php'); ?>
+
       <section class="popular section" id="menu">
         <span class="section__subtitle">Menu Spesial</span>
         <h2 class="section__title">Pempek Favorit</h2>
 
         <div class="popular__container container grid">
-          <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+          <?php while ($row = mysqli_fetch_assoc($result_favorit)): ?>
             <article class="popular__card">
-                <img src="../foto-foto/foto-menu/<?= htmlspecialchars($row['gambar_menu']) ?>" alt="<?= htmlspecialchars($row['nama_menu']) ?>" class="popular__img" />
+                <img src="../foto-foto/img/<?= htmlspecialchars($row['gambar_menu']) ?>" alt="<?= htmlspecialchars($row['nama_menu']) ?>" class="popular__img" />
                 <h3 class="popular__name"><?= htmlspecialchars($row['nama_menu']) ?></h3>
-                <span class="popular__description">Pempek</span>
                 <span class="popular__price">Rp<?= number_format($row['harga_menu'], 0, ',', '.') ?></span>
                 <div class="popular__buttons">
-                    <form action="../proses-pelanggan/proses-tambah-keranjang.php" method="POST">
-                      <input type="hidden" name="id_menu" value="<?= $row['id_menu'] ?>">
-                      <button type="submit" class="popular__button" title="Tambah ke Keranjang">
-                        <i class="ri-shopping-bag-line"></i>
-                      </button>
-                    </form>
-                    <a href="menu_detail.php?id=<?= $row['id_menu'] ?>" class="popular__detail">
+                    <a href="menu_detail.php?id=<?= urlencode($row['id_menu']) ?>" class="popular__detail">
                         Detail <i class="ri-arrow-right-line"></i>
-                    </a>
+                    </a> 
                 </div>
             </article>
           <?php endwhile; ?>
-            
+        </div>
+        
         <div class="view-all-menu">
             <a href="menu.php" class="button">
                 Lihat Semua Menu <i class="ri-arrow-right-line"></i>
             </a>
         </div>
+
       </section>
 
      <!--==================== TESTIMONI ====================-->
@@ -212,7 +228,7 @@
             testimoni.id_testimoni,
             testimoni.pesan,
             testimoni.rating,
-            pelanggan.nama_pelanggan AS nama
+            pelanggan.nama AS nama
             FROM testimoni 
             INNER JOIN pelanggan ON testimoni.id_pelanggan = pelanggan.id_pelanggan
             ORDER BY testimoni.id_testimoni DESC";
@@ -254,9 +270,19 @@
               <?php endwhile; ?>
             </div>
             <div class="view-all-menu">
-              <button class="button" data-bs-toggle="modal" data-bs-target="#testimoniModal">
-                <i class="ri-message-3-line"></i> Kirim Masukan
-              </button>
+
+              <?php if(isset($_SESSION['user_name'])): ?>
+                <!-- Jika sudah login, tampilkan tombol untuk buka modal -->
+                <button class="button" data-bs-toggle="modal" data-bs-target="#testimoniModal">
+                  <i class="ri-message-3-line"></i> Kirim Masukan
+                </button>
+              
+              <?php else: ?>  
+                <!-- Jika belum login, arahkan ke login.php -->
+                <a href="login.php" class="button">
+                  <i class="ri-login-box-line"></i> Login untuk Memberi Masukan
+                </a>            
+              <?php endif; ?>     
             </div>
         </div>
     </section>
@@ -347,7 +373,7 @@
           </div>
         </div>
 
-        <img src="assets/img/leaf-branch-4.png" alt="footer image" class="footer__leaf" />
+        <img src="../foto-foto/img/leaf-branch-4.png" alt="footer image" class="footer__leaf" />
         <span class="footer__copy">&#169; 2025 Copyright. All rights reserved</span>
       </div>
     </footer>

@@ -12,7 +12,7 @@
         if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] === 0) {
             $gambar     = $_FILES['gambar']['name'];
             $tmp_name   = $_FILES['gambar']['tmp_name'];
-            $folder     = '../foto-foto/foto-menu/';
+            $folder     = '../foto-foto/img';
             
             move_uploaded_file($tmp_name, $folder . $gambar);
 

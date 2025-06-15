@@ -7,14 +7,15 @@
         testimoni.rating,
         testimoni.tanggal_kirim AS tanggal_testimoni, 
         testimoni.pesan,
-        pelanggan.nama_pelanggan AS nama,
+        pelanggan.nama AS nama,
         pelanggan.email 
         FROM testimoni 
         INNER JOIN pelanggan ON testimoni.id_pelanggan = pelanggan.id_pelanggan";
 
+
     if ($search != '') {
         $query .= " WHERE 
-            pelanggan.nama_pelanggan LIKE '%$search%' OR 
+            pelanggan.nama LIKE '%$search%' OR 
             pelanggan.email LIKE '%$search%' ";
     }
 

@@ -8,6 +8,13 @@
         $username = $koneksi->real_escape_string($_POST["username"]);
         $passwordInput = $_POST["password"];
 
+        // 🔒 VALIDASI SEMUA INPUT TIDAK BOLEH KOSONG
+        if (empty($nama) || empty($telepon) || empty($username) || empty($passwordInput)) {
+            $_SESSION['errorMessage'] = "Semua field wajib diisi.";
+            header("Location: ../views-admin/tambah-admin.php");
+            exit();
+        }        
+
         // 🔒 VALIDASI PASSWORD
         if (strlen($passwordInput) > 8) {
             $_SESSION['errorMessage'] = "Password maksimal 8 karakter.";
@@ -35,11 +42,32 @@
         }
         $cekUsername->close();
 
+        // 📸 VALIDASI & HANDLE FOTO
+        $fotoName = $_FILES['foto']['name'];
+        $fotoTmp  = $_FILES['foto']['tmp_name'];
+        $folder   = "../foto-foto/admin/";
+
+        if (empty($fotoName)) {
+            $_SESSION['errorMessage'] = "Foto wajib diunggah.";
+            header("Location: ../views-admin/tambah-admin.php");
+            exit();
+        }
+
+        $ext = pathinfo($fotoName, PATHINFO_EXTENSION);
+        $namaFileBaru = uniqid('admin_') . '.' . strtolower($ext);
+        $targetPath = $folder . $namaFileBaru;
+
+        if (!move_uploaded_file($fotoTmp, $targetPath)) {
+            $_SESSION['errorMessage'] = "Upload foto gagal.";
+            header("Location: ../views-admin/tambah-admin.php");
+            exit();
+        }
+
         // ✅ HASH DAN SIMPAN
         $passwordHashed = password_hash($passwordInput, PASSWORD_DEFAULT);
-        $query = "INSERT INTO admin (nama_admin, no_telepon, username, password) VALUES (?, ?, ?, ?)";
+        $query = "INSERT INTO admin (nama_admin, no_telepon, username, password, foto_admin) VALUES (?, ?, ?, ?, ?)";
         $stmt  = $koneksi->prepare($query);
-        $stmt->bind_param("ssss", $nama, $telepon, $username, $passwordHashed);
+        $stmt->bind_param("sssss", $nama, $telepon, $username, $passwordHashed, $namaFileBaru);
 
         if ($stmt->execute()) {
             $_SESSION['successMessage'] = "Registrasi berhasil!";
@@ -50,5 +78,5 @@
         $stmt->close();
         header("Location: ../views-admin/admin.php");
         exit();
-    }
+        }
 ?>

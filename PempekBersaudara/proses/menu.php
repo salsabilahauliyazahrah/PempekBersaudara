@@ -23,10 +23,7 @@
                 HAVING 
                     m.id_menu LIKE '%$search%' OR
                     m.nama_menu LIKE '%$search%' OR
-                    m.harga_menu LIKE '%$search%' OR
-                    m.jumlah_tersedia LIKE '%$search%' OR
-                    m.gambar_menu LIKE '%$search%' OR
-                    total_terjual LIKE '%$search%'
+                    m.harga_menu LIKE '%$search%'
             ";
         }   
         $result = mysqli_query($koneksi, $query);

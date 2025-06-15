@@ -1,6 +1,11 @@
 <?php
-session_start();
-session_destroy();
-header("Location: ../views-pelanggan/login.php");
-exit();
+    session_start(); 
+
+    // Hapus semua data session
+    session_unset();
+    session_destroy();
+
+    // Arahkan kembali ke halaman index
+    header("Location: ../views-pelanggan/index.php");
+    exit();
 ?>
