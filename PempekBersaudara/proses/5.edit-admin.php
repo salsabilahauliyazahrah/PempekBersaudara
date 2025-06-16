@@ -22,11 +22,11 @@
 
         // Validasi ekstensi dan ukuran
         if (!in_array($ext, $allowed)) {
-            die("Format foto tidak didukung. Hanya jpg/jpeg/png.");
+            die("Format foto tidak didukung oleh field. Hanya jpg/jpeg/png.");
         }
 
         if ($_FILES['foto']['size'] > $maxSize) {
-            die("Ukuran foto terlalu besar. Maksimal 2MB.");
+            die("Ukuran foto terlalu besar untuk dimasukkan. Maksimal 2MB.");
         }
 
         // 🔁 Hapus foto lama
