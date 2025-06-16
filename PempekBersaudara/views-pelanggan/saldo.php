@@ -259,7 +259,7 @@ if ($result->num_rows > 0) {
           alert('Minimal top up Rp5.000');
         } else if (amount > 100000) {
           e.preventDefault();
-          alert('Maksimal top up Rp100.000');
+          alert('Maksimal topup Rp100.000');
         }
       });
     </script>
